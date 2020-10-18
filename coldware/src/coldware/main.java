@@ -5,7 +5,8 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		c_Planeta c_Planeta = new c_Planeta();
+		c_Planeta planeta = new c_Planeta();
+		
 
 		System.out.println("Bienvenido");
 		System.out.println("el davod u fara (asci)");
