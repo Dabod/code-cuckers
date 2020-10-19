@@ -5,21 +5,20 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		c_Planeta planeta = new c_Planeta();
+		c_Partida partida = new c_Partida();
 		
 
-		System.out.println("Bienvenido");
-		System.out.println("el davod u fara (asci)");
-		System.out.println("1-Jugar");
-
-		System.out.println("2-Reglas del juego");
-
-		System.out.println("3-INFORMACIÓN");
-
-		System.out.println("4- OPCIONES MUSICA");
-
-		System.out.println("SALIR");
-
+		System.out.println("Bienvenido/a a");
+		System.out.println(" ___   _____ _____ _    ______   _    _  ___  ______   ___ ");
+		System.out.println("|  _| /  __ \\  _  | |   |  _  \\ | |  | |/ _ \\ | ___ \\ |_  |");
+		System.out.println("| |   | /  \\/ | | | |   | | | | | |  | / /_\\ \\| |_/ /   | |");
+		System.out.println("| |   | |   | | | | |   | | | | | |/\\| |  _  ||    /    | |");
+		System.out.println("| |   | \\__/\\ \\_/ / |___| |/ /  \\  /\\  / | | || |\\ \\    | |");
+		System.out.println("| |_   \\____/\\___/\\_____/___/    \\/  \\/\\_| |_/\\_| \\_|  _| |");
+		System.out.println("|___|                                                 |___|");
+		System.out.println("                                                           ");
+		
+		partida.menu();
+	
 	}
-
 }
