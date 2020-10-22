@@ -6,7 +6,6 @@ public class main {
 		// TODO Auto-generated method stub
 
 		c_Partida partida = new c_Partida();
-		
 
 		System.out.println("Bienvenido/a a");
 		System.out.println(" ___   _____ _____ _    ______   _    _  ___  ______   ___ ");
@@ -17,8 +16,12 @@ public class main {
 		System.out.println("| |_   \\____/\\___/\\_____/___/    \\/  \\/\\_| |_/\\_| \\_|  _| |");
 		System.out.println("|___|                                                 |___|");
 		System.out.println("                                                           ");
+
+		int opcMenu = partida.getOpcionMenu();
+		partida.menu(opcMenu);
+		partida.setOpcionMenu(opcMenu);
 		
-		partida.menu();
-	
+		partida.opciones(opcMenu);
+
 	}
 }

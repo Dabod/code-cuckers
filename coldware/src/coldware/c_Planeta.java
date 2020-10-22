@@ -11,7 +11,6 @@ public class c_Planeta {
 
 	
 
-
 	private String iniciVariablesStr() {
 
 		return null;
