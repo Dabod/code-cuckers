@@ -17,14 +17,7 @@ public class c_Partida {
 	c_Planeta planeta4 = new c_Planeta();
 	c_Planeta planeta5 = new c_Planeta();
 
-	// Constructor
-	// public void ConstructorPartida() {
-
-	// this.vidas = 200;
-	// this.misilesRonda = 50;
-	// this.misilesDefensa = misilesRonda / 2;
-	// **AÑADIR GETTERS Y SETTERS
-	// }
+	// Constructor Partida
 
 	// Metodos
 	public int menu(int opcionMenu) {
@@ -34,7 +27,7 @@ public class c_Partida {
 		System.out.println("4 - Opciones Musica\n");
 		System.out.println("0 - Salir");
 		System.out.println("\nElige una opción del menú introduciendo el número correspondiente a continuación:\n");
-		opcionMenu = teclado.nextInt();
+		this.opcionMenu = teclado.nextInt();
 
 		while (opcionMenu < 0 || opcionMenu > 4) {
 			System.err.println(
@@ -58,36 +51,26 @@ public class c_Partida {
 	}
 
 	public void setOpcionMenu(int nuevaOpMenu) {
+		System.out.println(nuevaOpMenu);
 		this.opcionMenu = nuevaOpMenu;
-	}
 
-	public void opciones(int nuevaOpMenu) {
-		switch (nuevaOpMenu) {
-		case 1:
-			iniciarPartida();
-			System.out.println("partida");
-			break;
-		case 2:
-			infoJuego();
-			System.out.println("info");
-			break;
-		case 3:
-			opcionesReproductor();
-			System.out.println("opciones musiquilla");
-			break;
-		case 0:
-			System.out.println("Se finí");
-			break;
-		}
 	}
 
 	public void iniciarPartida() {
 		// jugar menu.
 		System.out.println("¡Partida iniciada!");
+		System.out.println(planeta1.getVidas());
+
+	}
+
+	public void reglasJuego() {
+		System.out.println("Aqui van las reglas del juego.");
+		System.out.println("");
+		System.out.println("");
 	}
 
 	public void infoJuego() {
-		System.out.println("Aqui van las reglas del juego.");
+		System.out.println("Aqui van la info del juego.");
 	}
 
 	public void opcionesReproductor() {

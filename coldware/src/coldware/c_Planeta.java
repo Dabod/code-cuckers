@@ -9,7 +9,14 @@ public class c_Planeta {
 	private int misilesRonda;
 	private int misilesDefensa;
 
-	
+	public c_Planeta() {
+
+		this.vidas = 200;
+		this.misilesRonda = 50;
+		this.misilesDefensa = misilesRonda / 2;
+		
+		this.numEquipos++;
+	}
 
 	private String iniciVariablesStr() {
 
@@ -30,6 +37,14 @@ public class c_Planeta {
 
 		return 0;
 
+	}
+
+	public int getVidas() {
+		return vidas;
+	}
+
+	public void setVidas(int vidas) {
+		this.vidas = vidas;
 	}
 
 }
