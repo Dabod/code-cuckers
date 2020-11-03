@@ -71,17 +71,19 @@ public class Partida {
 			efectosRonda(matDefAtk);
 
 			checkVivos(equiposVivos);
-			System.out.println("Equipos vivos: "+equiposVivos);
+			System.out.println("Equipos vivos: "+equiposVivos+"\n\n");
+			parar(1000);
 			ronda++;
 		}
 		if (equiposVivos == 1) {
-			parar(3000);
 			mostrarGanador();
-		} else {
 			parar(3000);
+		} else {
 			empate();
+			parar(3000);
 		}
-
+		System.out.println("Volviendo al menú principal...");
+		parar(1000);
 	}
 
 	public int[][] ronda(int[][] matDefAtk) { // IMPORTANT: S'ha de separar en dos parts; presa de decisions i efecte de
@@ -101,7 +103,6 @@ public class Partida {
 				System.out.println("Ten en cuenta que esta decisión es definitiva (para esta ronda).");
 
 				matDefAtk[0][equipoAtacante] = teclado.nextInt();
-				equipos[equipoAtacante].setMisilesDefensa(matDefAtk[0][equipoAtacante]);
 
 				while (matDefAtk[0][equipoAtacante] > 25 || matDefAtk[0][equipoAtacante] < 0) {
 					System.err.println(
@@ -111,6 +112,8 @@ public class Partida {
 					System.out.println("Ten en cuenta que esta decisión es definitiva (para esta ronda).");
 					matDefAtk[0][equipoAtacante] = teclado.nextInt();
 				}
+				equipos[equipoAtacante].setMisilesDefensa(matDefAtk[0][equipoAtacante]);
+				
 				costeMisilesDefensa = matDefAtk[0][equipoAtacante] * 2;
 				misilesRestantes = equipos[equipoAtacante].getMisilesRonda() - costeMisilesDefensa;
 				equipos[equipoAtacante].setMisilesRonda(misilesRestantes);
