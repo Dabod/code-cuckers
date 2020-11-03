@@ -86,8 +86,7 @@ public class Partida {
 		parar(1000);
 	}
 
-	public int[][] ronda(int[][] matDefAtk) { // IMPORTANT: S'ha de separar en dos parts; presa de decisions i efecte de
-												// les mateixes al ACABAR-SE LA RONDA.
+	public int[][] ronda(int[][] matDefAtk) {
 		int equipoAtacante = 0, equipoObjetivo = 0;
 		int costeMisilesDefensa, misilesRestantes;
 
