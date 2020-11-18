@@ -8,7 +8,9 @@ public class Main {
 		int opcionMenu = -1;
 
 		Scanner teclado = new Scanner(System.in);
-		Partida partida = new Partida();
+		//Partida partida = new Partida();
+		Partida2 partida2 = new Partida2();
+
 
 		System.out.println("Bienvenido/a a");
 		System.out.println(" ___   _____ _____ _    ______   _    _  ___  ______   ___ ");
@@ -19,45 +21,45 @@ public class Main {
 		System.out.println("| |_   \\____/\\___/\\_____/___/    \\/  \\/\\_| |_/\\_| \\_|  _| |");
 		System.out.println("|___|                                                 |___|");
 		System.out.println("                                                           ");
-		partida.parar(3000);
+		//1partida.parar(3000);
 
 		while (opcionMenu != 0) {
 			System.out.println("\n1 - Jugar\n");
 			System.out.println("2 - Reglas del Juego\n");
-			System.out.println("3 - Información\n");
+			System.out.println("3 - Informaciï¿½n\n");
 			System.out.println("4 - Opciones Musica\n");
 			System.out.println("0 - Salir");
-			System.out.println("\nElige una opción del menú introduciendo el número correspondiente:\n");
+			System.out.println("\nElige una opciï¿½n del menï¿½ introduciendo el nï¿½mero correspondiente:\n");
 			opcionMenu = teclado.nextInt();
 			while (opcionMenu < 0 || opcionMenu > 4) {
 				System.err.println(
-						"!Opción invalida! Asegurate de escoger un número correspondiente a alguna opción del menú.");
+						"!Opciï¿½n invalida! Asegurate de escoger un nï¿½mero correspondiente a alguna opciï¿½n del menï¿½.");
 
 				System.out.println("\n1 - Jugar\n");
 				System.out.println("2 - Reglas del Juego\n");
-				System.out.println("3 - Información\n");
+				System.out.println("3 - Informaciï¿½n\n");
 				System.out.println("4 - Opciones Musica\n");
 				System.out.println("0 - Salir");
-				System.out.println("\nElige una opción del menú introduciendo el número correspondiente:\n");
+				System.out.println("\nElige una opciï¿½n del menï¿½ introduciendo el nï¿½mero correspondiente:\n");
 				opcionMenu = teclado.nextInt();
 
 			}
 			switch (opcionMenu) {
 			case 1:
-				partida.iniciarPartida();
+				partida2.iniciarpartida2();
 				break;
 			case 2:
-				partida.reglasJuego();
+				//partida.reglasJuego();
 				break;
 			case 3:
-				partida.infoJuego();
+				//partida.infoJuego();
 				break;
 			case 4:
-				partida.opcionesReproductor();
+				//partida.opcionesReproductor();
 				System.out.println("WIP");
 				break;
 			case 0:
-				System.out.println("¡¡¡ADIÓS MUY BUENAS!!!");
+				System.out.println("ï¿½ï¿½ï¿½ADIï¿½S MUY BUENAS!!!");
 				break;
 			}
 		}

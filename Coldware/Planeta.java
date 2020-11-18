@@ -9,12 +9,14 @@ public class Planeta {
 	private int misilesDefensa;
 	private boolean vivo;
 
-	public Planeta() {
+	public Planeta(int x, String nombre) {
 
+		this.nombreEquipo = nombre;
 		this.vidas = 200;
 		this.misilesRonda = 50;
 		this.numEquipos++;
 	}
+	
 
 	public int calcularDmg(int misiles) {
 		if (misiles >= misilesDefensa) {
@@ -83,5 +85,6 @@ public class Planeta {
 	public void setMisilesDefensa(int misilesDefensa) {
 		this.misilesDefensa = misilesDefensa;
 	}
+	
 
 }

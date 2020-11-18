@@ -1,4 +1,4 @@
-import java.util.Scanner;
+/*import java.util.Scanner;
 
 public class Partida {
 
@@ -26,7 +26,7 @@ public class Partida {
 	// Metodos
 
 	public void iniciarPartida() {
-		// Opción "jugar" del menú.
+		// Opciï¿½n "jugar" del menï¿½.
 		System.out.println("Iniciando partida en...");
 		parar(1000);
 		System.out.println("3...");
@@ -48,7 +48,7 @@ public class Partida {
 					|| nombreEquipo.equals(equipos[4].getNombreEquipo())
 					|| nombreEquipo.equals(equipos[5].getNombreEquipo())) {
 				System.err.println(
-						"¡El nombre del equipo debe ser único! Los nombres no pueden repetirse, introduce otro nombre.");
+						"ï¿½El nombre del equipo debe ser ï¿½nico! Los nombres no pueden repetirse, introduce otro nombre.");
 				System.out.println("Equipo " + x + ": ");
 				nombreEquipo = teclado.nextLine();
 			}
@@ -56,7 +56,7 @@ public class Partida {
 			equipos[x].setNombreEquipo(nombreEquipo);
 
 		}
-		System.out.println("\n\n¡Inicio de partida!\n\n");
+		System.out.println("\n\nï¿½Inicio de partida!\n\n");
 		parar(2000);
 		partida();
 
@@ -82,7 +82,7 @@ public class Partida {
 			empate();
 			parar(3000);
 		}
-		System.out.println("Volviendo al menú principal...");
+		System.out.println("Volviendo al menï¿½ principal...");
 		parar(1000);
 	}
 
@@ -98,17 +98,17 @@ public class Partida {
 				equipos[equipoAtacante].setMisilesRonda(50);
 				System.out.println("\nTurno de " + equipos[equipoAtacante].getNombreEquipo() + ":");
 				System.out.println("Misiles disponibles: " + equipos[equipoAtacante].getMisilesRonda() + ".\n");
-				System.out.println("¿Con cuantos misiles quieres defenderte?");
-				System.out.println("Ten en cuenta que esta decisión es definitiva (para esta ronda).");
+				System.out.println("ï¿½Con cuantos misiles quieres defenderte?");
+				System.out.println("Ten en cuenta que esta decisiï¿½n es definitiva (para esta ronda).");
 
 				matDefAtk[0][equipoAtacante] = teclado.nextInt();
 
 				while (matDefAtk[0][equipoAtacante] > 25 || matDefAtk[0][equipoAtacante] < 0) {
 					System.err.println(
-							"No puedes usar más de 25 misiles de defensa ni tener defensa negativa (¡Los misiles de defensa cuestan x2!).");
+							"No puedes usar mï¿½s de 25 misiles de defensa ni tener defensa negativa (ï¿½Los misiles de defensa cuestan x2!).");
 					System.out.println("Misiles disponibles: " + equipos[equipoAtacante].getMisilesRonda() + ".\n");
-					System.out.println("¿Con cuantos misiles quieres defenderte?");
-					System.out.println("Ten en cuenta que esta decisión es definitiva (para esta ronda).");
+					System.out.println("ï¿½Con cuantos misiles quieres defenderte?");
+					System.out.println("Ten en cuenta que esta decisiï¿½n es definitiva (para esta ronda).");
 					matDefAtk[0][equipoAtacante] = teclado.nextInt();
 				}
 				equipos[equipoAtacante].setMisilesDefensa(matDefAtk[0][equipoAtacante]);
@@ -121,7 +121,7 @@ public class Partida {
 					if (equipos[equipoAtacante].getMisilesRonda() != 0) {
 
 						do {
-							System.out.println("\n¿A quien quieres atacar? (Selecciona un número de la lista)");
+							System.out.println("\nï¿½A quien quieres atacar? (Selecciona un nï¿½mero de la lista)");
 
 							if (equipos[1].getVidas() == 0) {
 								System.out.println("(1) " + equipos[1].getNombreEquipo() + " (" + equipos[1].getVidas()
@@ -165,18 +165,18 @@ public class Partida {
 							equipoObjetivo = teclado.nextInt();
 
 							if (equipoObjetivo < 1 || equipoObjetivo > 5) {
-								System.err.println("¡Debes seleccionar un número correspondiente a algún equipo!");
+								System.err.println("ï¿½Debes seleccionar un nï¿½mero correspondiente a algï¿½n equipo!");
 							} else if (equipoObjetivo == equipoAtacante) {
-								System.err.println("¡No puedes atacarte a ti mismo!\n");
+								System.err.println("ï¿½No puedes atacarte a ti mismo!\n");
 								equipoObjetivo = 0;
 							} else if (equipos[equipoObjetivo].getVidas() == 0) {
-								System.err.println("Ese equipo ya está muerto. Selecciona otro objetivo.");
+								System.err.println("Ese equipo ya estï¿½ muerto. Selecciona otro objetivo.");
 								equipoObjetivo = 0;
 							}
 
 						} while (equipoObjetivo < 1 || equipoObjetivo > 5);
 
-						System.out.println("¿Con cuantos misiles vas a atacar a "
+						System.out.println("ï¿½Con cuantos misiles vas a atacar a "
 								+ equipos[equipoObjetivo].getNombreEquipo() + "?");
 						System.out.println("Misiles disponibles: " + equipos[equipoAtacante].getMisilesRonda() + ".\n");
 						matDefAtk[equipoObjetivo][equipoAtacante] = teclado.nextInt();
@@ -185,15 +185,15 @@ public class Partida {
 								|| matDefAtk[equipoObjetivo][equipoAtacante] < 0) {
 
 							if (matDefAtk[equipoObjetivo][equipoAtacante] < 0) {
-								System.err.println("No puedes atacar con un valor negativo, ¿estás troleando o que?");
-								System.out.println("¿Con cuantos misiles vas a atacar a "
+								System.err.println("No puedes atacar con un valor negativo, ï¿½estï¿½s troleando o que?");
+								System.out.println("ï¿½Con cuantos misiles vas a atacar a "
 										+ equipos[equipoObjetivo].getNombreEquipo() + "?");
 								System.out.println(
 										"Misiles disponibles: " + equipos[equipoAtacante].getMisilesRonda() + ".\n");
 								matDefAtk[equipoObjetivo][equipoAtacante] = teclado.nextInt();
 							} else {
-								System.err.println("¡No te quedan suficientes misiles para hacer ese ataque!");
-								System.out.println("¿Con cuantos misiles vas a atacar a "
+								System.err.println("ï¿½No te quedan suficientes misiles para hacer ese ataque!");
+								System.out.println("ï¿½Con cuantos misiles vas a atacar a "
 										+ equipos[equipoObjetivo].getNombreEquipo() + "?");
 								System.out.println(
 										"Misiles disponibles: " + equipos[equipoAtacante].getMisilesRonda() + ".\n");
@@ -231,7 +231,7 @@ public class Partida {
 			for (cColumna = 1; cColumna < 6; cColumna++) {
 
 				if (matDefAtk[x][cColumna] > 0) {
-					System.out.println("¡" + equipos[cColumna].getNombreEquipo() + " le ataca con "
+					System.out.println("ï¿½" + equipos[cColumna].getNombreEquipo() + " le ataca con "
 							+ matDefAtk[x][cColumna] + " misiles!");
 					ataqueTotal = ataqueTotal + matDefAtk[x][cColumna];
 					matDefAtk[x][cColumna] = 0;
@@ -265,30 +265,30 @@ public class Partida {
 		System.out.println("usamos 40 para atacar solo podremos usar 5 para defendernos (nos costarian 10 misiles).");
 		parar(2000);
 		
-		System.out.println("\nIntroduce el numero 1 para volver al menú principal.");
+		System.out.println("\nIntroduce el numero 1 para volver al menï¿½ principal.");
 		opcionMenu = teclado.nextInt();
 		
 		while(opcionMenu != 1) {
-			System.err.println("\nDebes introducir el numero 1 para volver al menú principal");
+			System.err.println("\nDebes introducir el numero 1 para volver al menï¿½ principal");
 			opcionMenu = teclado.nextInt();
 		}
 
 	}
 
 	public void infoJuego() {
-		System.out.println("<-- INFORMACIÓN -->");
+		System.out.println("<-- INFORMACIï¿½N -->");
 		
 		System.out.println("Acerca de este programa:\n");
-		System.out.println("Versión 1.0");
+		System.out.println("Versiï¿½n 1.0");
 		System.out.println("Contacto: marcvaldiviaprim99@gmail.com, guepardar@gmail.com");
 		System.out.println("Autores: David Alba, Marc Valdivia\n");
 		parar(2000);
 		
-		System.out.println("\nIntroduce el numero 1 para volver al menú principal.");
+		System.out.println("\nIntroduce el numero 1 para volver al menï¿½ principal.");
 		opcionMenu = teclado.nextInt();
 		
 		while(opcionMenu != 1) {
-			System.err.println("\nDebes introducir el numero 1 para volver al menú principal");
+			System.err.println("\nDebes introducir el numero 1 para volver al menï¿½ principal");
 			opcionMenu = teclado.nextInt();
 		}
 
@@ -297,14 +297,14 @@ public class Partida {
 	public void opcionesReproductor() {
 		System.out.println("<-- OPCIONES DEL REPRODUCTOR -->");
 		
-		System.out.println("Desde aqui se podrá configurar el reproductor (Cuando haya uno).");
+		System.out.println("Desde aqui se podrï¿½ configurar el reproductor (Cuando haya uno).");
 		parar(2000);
 		
-		System.out.println("\nIntroduce el numero 1 para volver al menú principal.");
+		System.out.println("\nIntroduce el numero 1 para volver al menï¿½ principal.");
 		opcionMenu = teclado.nextInt();
 		
 		while(opcionMenu != 1) {
-			System.err.println("\nDebes introducir el numero 1 para volver al menú principal");
+			System.err.println("\nDebes introducir el numero 1 para volver al menï¿½ principal");
 			opcionMenu = teclado.nextInt();
 		}
 	}
@@ -325,8 +325,8 @@ public class Partida {
 				ganadorPartida = equipos[x].getNombreEquipo();
 			}
 		}
-		System.out.println("¡El máximo campeón mundial súper guay de esta partida es... " + ganadorPartida
-				+ "! ¡Sois loh mehore!");
+		System.out.println("ï¿½El mï¿½ximo campeï¿½n mundial sï¿½per guay de esta partida es... " + ganadorPartida
+				+ "! ï¿½Sois loh mehore!");
 	}
 
 	public void empate() {
@@ -334,7 +334,7 @@ public class Partida {
 	}
 
 	public void finalizarPartida() {
-		System.out.println("Partida terminada. Volviendo al menú principal...");
+		System.out.println("Partida terminada. Volviendo al menï¿½ principal...");
 	}
 
 	public void parar(int milisegons) {
@@ -371,4 +371,4 @@ public class Partida {
 	public void setRonda(int ronda) {
 		this.ronda = ronda;
 	}
-}
+}*/
