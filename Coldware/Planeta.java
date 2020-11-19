@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 
 public class Planeta {
 
 	// Atributs
-	private int numEquipos; //No se usa de momento
+	private int numEquipos; // No se usa de momento
 	private String nombreEquipo;
 	private int vidas;
 	private int misilesRonda;
@@ -16,7 +17,6 @@ public class Planeta {
 		this.misilesRonda = 50;
 		this.numEquipos++;
 	}
-	
 
 	public int calcularDmg(int misiles) {
 		if (misiles >= misilesDefensa) {
@@ -28,6 +28,19 @@ public class Planeta {
 			this.vidas = 0;
 		}
 		return this.vidas;
+	}
+
+	public int defender(int misiles) {
+		misiles = misiles / 2;
+		this.misilesDefensa = misiles;
+
+		return this.misilesDefensa;
+	}
+
+	public int usarMisiles(int misiles) {
+		this.misilesRonda = this.misilesRonda - misiles;
+
+		return this.misilesRonda;
 	}
 
 	// GETTERS Y SETTERS
@@ -85,6 +98,5 @@ public class Planeta {
 	public void setMisilesDefensa(int misilesDefensa) {
 		this.misilesDefensa = misilesDefensa;
 	}
-	
 
 }

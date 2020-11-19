@@ -36,7 +36,7 @@ public class Partida2 {
 		} while (pocosEquipos);
 
 		for (x = 0; x < eleccion; x++) {
-			System.out.println("Introduce el nombre de usuario");
+			System.out.println("Introduce el nombre del Equipo.");
 
 			nombre = teclado.next();
 
@@ -49,31 +49,50 @@ public class Partida2 {
 
 	public void ataque() {
 
-		ArrayList<String> objetivo = new ArrayList<String>();
+		ArrayList<Integer> objetivos = new ArrayList<Integer>();
+
+		ArrayList<Integer> cantidadAtk = new ArrayList<Integer>();
 
 		Scanner teclado = new Scanner(System.in);
 
-		int missiles;
+		int misiles;
 		int cont = 0;
-
+		int opcion = 0;
+		
+		
+		 
 		for (x = 0; x < equipos.size(); x++) {
-			System.out.println(
-					"(" + cont++ + ") " + equipos.get(x).getNombreEquipo() + " " + "(" + equipos.get(x).getVidas()+" vidas)");
-
+			System.out.println("(" + x + ") " + equipos.get(x).getNombreEquipo() + " " + "(" + equipos.get(x).getVidas()
+					+ " vidas)");
+			cont++;
 		}
 		for (x = 0; equipos.size() > x; x++) {
+			System.out.println("(" + cont + ") Misiles Restantes a defensa.\n");
 
 			while (equipos.get(x).getMisilesRonda() != 0) {
-				System.out.println("Introduce el numero del objetivo que quieres atacar o (" + (cont + 1)+ ") para poner los misiles restantes a defensa");
+				System.out.println("Introduce el numero del objetivo que quieres atacar o (" + (cont)
+						+ ") para poner los misiles restantes a defensa");
+				opcion = intScanner();
 				
 				
-				
-				System.out.println("¿Con cuantos misiles le vas a atacar?");
 
-				missiles = teclado.nextInt();
+				if (opcion == cont) {// Defensa todo
+					equipos.get(x).defender(equipos.get(x).getMisilesRonda());
+					equipos.get(x).usarMisiles(equipos.get(x).getMisilesRonda());
+
+					System.out.println(equipos.get(x).getMisilesDefensa());
+					System.out.println(equipos.get(x).getMisilesRonda());
+
+				} else {
+					objetivos.add(opcion);
+					System.out.println("¿Con cuantos misiles le vas a atacar?");
+					
+					misiles = intScanner();
+					cantidadAtk.add(misiles);
+				}
+			
 			}
-	
-
+			
 		}
 
 	}
