@@ -4,7 +4,7 @@ import java.util.Scanner;
 // comprobar int partida1/main
 public class Partida2 {
 
-	private int x, i;
+	private int x;
 	private int eleccion;
 
 	private ArrayList<Planeta> equipos = new ArrayList<Planeta>();
@@ -12,7 +12,6 @@ public class Partida2 {
 	public void iniciarpartida2() {
 
 		int x;
-		int elecion = 0;
 		boolean pocosEquipos;
 		String nombre = null;
 
@@ -36,13 +35,18 @@ public class Partida2 {
 		} while (pocosEquipos);
 
 		for (x = 0; x < eleccion; x++) {
-			System.out.println("Introduce el nombre del Equipo.");
+			System.out.println("Introduce el nombre del Equipo "+x+".");
 
 			nombre = teclado.next();
 
+			for (x = 0; x < equipos.size(); x++) {
+				while (equipos.get(x).getNombreEquipo().equals(nombre)) {
+					System.out.println("Nombre en uso. Introduce un nombre único.");
+					nombre = teclado.next();
+				}
+			}
 			guardarNombre = (new Planeta(x, nombre));
 			equipos.add(guardarNombre);
-
 		}
 		ataque();
 	}
@@ -58,9 +62,7 @@ public class Partida2 {
 		int misiles;
 		int cont = 0;
 		int opcion = 0;
-		
-		
-		 
+
 		for (x = 0; x < equipos.size(); x++) {
 			System.out.println("(" + x + ") " + equipos.get(x).getNombreEquipo() + " " + "(" + equipos.get(x).getVidas()
 					+ " vidas)");
@@ -73,8 +75,11 @@ public class Partida2 {
 				System.out.println("Introduce el numero del objetivo que quieres atacar o (" + (cont)
 						+ ") para poner los misiles restantes a defensa");
 				opcion = intScanner();
-				
-				
+
+				while (opcion > cont || opcion < 0) {
+					System.out.println("¡Opcion no válida! Selecciona una opción de la lista.");
+					opcion = intScanner();
+				}
 
 				if (opcion == cont) {// Defensa todo
 					equipos.get(x).defender(equipos.get(x).getMisilesRonda());
@@ -85,14 +90,24 @@ public class Partida2 {
 
 				} else {
 					objetivos.add(opcion);
-					System.out.println("¿Con cuantos misiles le vas a atacar?");
-					
-					misiles = intScanner();
+
+					do {
+						System.out.println("¿Con cuantos misiles le vas a atacar?");
+						misiles = intScanner();
+
+						if (misiles <= 0) {
+							System.out.println("¡No puedes atacar con 0 misiles o menos!");
+						} else if (misiles > equipos.get(x).getMisilesRonda()) {
+							System.out.println("Misiles insuficientes.");
+						}
+					} while (misiles <= 0 || misiles > equipos.get(x).getMisilesRonda());
+					equipos.get(x).usarMisiles(misiles);
+					System.out.println(equipos.get(x).getMisilesRonda());
 					cantidadAtk.add(misiles);
 				}
-			
+
 			}
-			
+
 		}
 
 	}
@@ -106,15 +121,17 @@ public class Partida2 {
 			if (teclado.hasNextInt()) {
 				numero = teclado.nextInt();
 				esInt = true;
+			} else if (numero >= 1000000000) {
+				System.out.println("¡Ese numero es demasiado grande!");
+				numero = teclado.nextInt();
 			} else {
 				System.out.println("No puedes insertar letras.");
 				teclado.nextLine();
-
 			}
 
 		} while (!esInt);
-		return numero;
 
+		return numero;
 	}
 
 }
