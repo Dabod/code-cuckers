@@ -26,21 +26,21 @@ public class Main {
 		while (opcionMenu != 0) {
 			System.out.println("\n1 - Jugar\n");
 			System.out.println("2 - Reglas del Juego\n");
-			System.out.println("3 - Informaciï¿½n\n");
+			System.out.println("3 - Información\n");
 			System.out.println("4 - Opciones Musica\n");
 			System.out.println("0 - Salir");
-			System.out.println("\nElige una opciï¿½n del menï¿½ introduciendo el nï¿½mero correspondiente:\n");
+			System.out.println("\nElige una opción del menú introduciendo el número correspondiente:\n");
 			opcionMenu = teclado.nextInt();
 			while (opcionMenu < 0 || opcionMenu > 4) {
 				System.err.println(
-						"!Opciï¿½n invalida! Asegurate de escoger un nï¿½mero correspondiente a alguna opciï¿½n del menï¿½.");
+						"!Opción invalida! Asegurate de escoger un número correspondiente a alguna opción del menú.");
 
 				System.out.println("\n1 - Jugar\n");
 				System.out.println("2 - Reglas del Juego\n");
-				System.out.println("3 - Informaciï¿½n\n");
+				System.out.println("3 - Información\n");
 				System.out.println("4 - Opciones Musica\n");
 				System.out.println("0 - Salir");
-				System.out.println("\nElige una opciï¿½n del menï¿½ introduciendo el nï¿½mero correspondiente:\n");
+				System.out.println("\nElige una opción del menú introduciendo el número correspondiente:\n");
 				opcionMenu = teclado.nextInt();
 
 			}
@@ -59,7 +59,7 @@ public class Main {
 				System.out.println("WIP");
 				break;
 			case 0:
-				System.out.println("ï¿½ï¿½ï¿½ADIï¿½S MUY BUENAS!!!");
+				System.out.println("¡¡¡ADIÓS MUY BUENAS!!!");
 				break;
 			}
 		}

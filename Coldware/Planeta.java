@@ -6,6 +6,7 @@ public class Planeta {
 	private String nombreEquipo;
 	private int vidas;
 	private int misilesRonda;
+	private int misilesBase;
 	private int misilesDefensa;
 	private boolean vivo;
 
@@ -14,7 +15,9 @@ public class Planeta {
 		this.nombreEquipo = nombre;
 		this.vidas = 200;
 		this.misilesRonda = 50;
-		this.numEquipos++;
+		this.numEquipos = x + 1;
+		this.misilesBase = this.misilesRonda;
+		this.vivo = true;
 	}
 
 	public int calcularDmg(int misiles) {
@@ -40,6 +43,11 @@ public class Planeta {
 		this.misilesRonda = this.misilesRonda - misiles;
 
 		return this.misilesRonda;
+	}
+
+	public int resetMisiles() {
+		this.misilesRonda = this.misilesBase;
+		return misilesRonda;
 	}
 
 	// GETTERS Y SETTERS
