@@ -1,14 +1,14 @@
-
 public class Planeta {
-
 	// Atributs
-	private int numEquipos; // No se usa de momento
+	private int numEquipos;
 	private String nombreEquipo;
 	private int vidas;
 	private int misilesRonda;
 	private int misilesBase;
 	private int misilesDefensa;
+	private int posicionEquipo;
 	private boolean vivo;
+
 
 	public Planeta(int x, String nombre) {
 
@@ -49,6 +49,7 @@ public class Planeta {
 		this.misilesRonda = this.misilesBase;
 		return misilesRonda;
 	}
+
 
 	// GETTERS Y SETTERS
 
@@ -105,5 +106,14 @@ public class Planeta {
 	public void setMisilesDefensa(int misilesDefensa) {
 		this.misilesDefensa = misilesDefensa;
 	}
+	
+	public int getPosicionEquipo() {
+		return posicionEquipo;
+	}
 
+	public void setPosicionEquipo(int posicionEquipos) {
+		this.posicionEquipo = posicionEquipos;
+	}
+
+	
 }
