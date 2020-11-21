@@ -40,7 +40,7 @@ public class Partida2 {
 		for (x = 0; x < eleccion; x++) {
 			System.out.println("Introduce el nombre del Equipo " + x + ".");
 
-			nombre = teclado.next();
+			nombre = teclado.nextLine();
 
 			for (x = 0; x < equipos.size(); x++) {
 				while (equipos.get(x).getNombreEquipo().equals(nombre)) {
@@ -53,6 +53,8 @@ public class Partida2 {
 			tipoPlaneta = intScanner();
 			guardarEquipo = (new Planeta(x, nombre, tipoPlaneta));
 			equipos.add(guardarEquipo);
+			
+			System.out.println(equipos.get(x).getTipoPlaneta());
 			
 			System.out.println(equipos.get(x).getNombreEquipo());
 			System.out.println(equipos.get(x).getMisilesRonda());
@@ -85,6 +87,7 @@ public class Partida2 {
 		int misilesEleccion;
 		int x = 0, y = 0, cont = equipos.size();
 		int opcion = 0;
+		int tipoObjetivo; // Variable que guarda el numero del tipo del objetivo
 
 		numRonda++;
 		System.out.println("\n\nRONDA " + numRonda);
@@ -102,8 +105,7 @@ public class Partida2 {
 					System.out.println("Misiles disponibles: " + equipos.get(x).getMisilesRonda() + ".\n");
 
 					for (y = 0; y < equipos.size(); y++) {
-						System.out.println("(" + y + ") " + equipos.get(y).getNombreEquipo() + " " + "("
-								+ equipos.get(y).getVidas() + " vidas)");
+						System.out.println("(" + y + ") " + equipos.get(y).getNombreEquipo() + " ---> HP: " + equipos.get(y).getVidas());
 					}
 					System.out.println("(" + cont + ") Misiles Restantes a defensa.\n");
 
@@ -128,8 +130,8 @@ public class Partida2 {
 						equipos.get(x).usarMisiles(equipos.get(x).getMisilesRonda());
 
 					} else {
-						equipos.get(x).condicionesTipos(tipoPlaneta, cont, misilesEleccion, equipos.get(opcion).getVidas());
 						equipos.get(x).introducirObjetivo(opcion);
+						tipoObjetivo = equipos.get(opcion).getTipoPlaneta();
 
 						do {
 							System.out.println("¿Con cuantos misiles le vas a atacar?");
@@ -137,8 +139,10 @@ public class Partida2 {
 							cantMisilesError(misilesEleccion, x);
 
 						} while (misilesEleccion <= 0 || misilesEleccion > equipos.get(x).getMisilesRonda());
-
+						
 						equipos.get(x).usarMisiles(misilesEleccion);
+						equipos.get(x).ventajasColores(tipoObjetivo, misilesEleccion);
+						System.out.println(misilesEleccion);
 						equipos.get(x).introducirAtaque(misilesEleccion);
 
 					}
@@ -176,7 +180,7 @@ public class Partida2 {
 
 		for (y = 0; y < equipos.size(); y++) { // Recorre los posibles equipos atacantes
 
-			for (z = 0; z < equipos.get(y).objetivos.size(); z++) { // Recorre los arrays objetivos
+			for (z = 0; z < equipos.get(y).objetivos.size(); z++) { // Recorre el array objetivos
 
 				if (equipos.get(y).objetivos.get(z) == x) { // Comprobamos si el equipo atacante esta atacando al equipo
 															// con posicion x
@@ -217,6 +221,33 @@ public class Partida2 {
 			}
 		}
 	}
+	
+//	public int ventajasColores(int tipoObjetivo, int misilesEleccion) {
+//		if (tipoObjetivo == 2) { //Condiciones equipo rojo
+//			if (tipoObjetivo == 4) { //Equipo verde, atk*2
+//				misilesEleccion = misilesEleccion * 2;
+//			} else if (tipoObjetivo == 3) { //Equipo azul, atk/2
+//				misilesEleccion = misilesEleccion / 2;
+//			}
+//		}
+//		
+//		if (tipoObjetivo == 3) { //Condiciones equipo azul
+//			if (tipoObjetivo == 2) { //Equipo rojo, atk*2
+//				misilesEleccion = misilesEleccion * 2;
+//			} else if (tipoObjetivo == 4) { //Equipo verde, atk/2
+//				misilesEleccion = misilesEleccion / 2;
+//			}
+//		}
+//		
+//		if (tipoObjetivo == 4) { //Condiciones equipo verde
+//			if (tipoObjetivo == 3) { //Equipo azul, atk*2
+//				misilesEleccion = misilesEleccion * 2;
+//			} else if (tipoObjetivo == 2) { //Equipo rojo, atk/2
+//				misilesEleccion = misilesEleccion / 2;
+//			}
+//		}
+//		return misilesEleccion;
+//	}
 
 	public int cantMisilesError(int misilesEleccion, int x) {
 		if (misilesEleccion <= 0) {

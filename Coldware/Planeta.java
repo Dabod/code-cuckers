@@ -11,6 +11,8 @@ public class Planeta {
 	private int misilesDefensa;
 	private int posicionEquipo;
 	private int tipoPlaneta;
+	
+
 	private boolean vivo;
 	private String nombreEquipo;
 	private String nombreTipo;
@@ -18,10 +20,11 @@ public class Planeta {
 	public Planeta(int x, String nombre, int tipoPlaneta) {
 
 		this.nombreEquipo = nombre;
+		this.tipoPlaneta = tipoPlaneta;
 
 		switch (tipoPlaneta) {
 		case 1: // Planeta Normal
-			this.nombreTipo = "(Planeta Normal,";
+			this.nombreTipo = "(Normal)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
 			this.misilesRonda = 50;
@@ -31,7 +34,7 @@ public class Planeta {
 
 			break;
 		case 2: // Planeta Rojo
-			this.nombreTipo = "(Planeta Rojo,";
+			this.nombreTipo = "(Rojo)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
 			this.misilesRonda = 50;
@@ -41,7 +44,7 @@ public class Planeta {
 
 			break;
 		case 3: // Planeta Azul
-			this.nombreTipo = "(Planeta Azul,";
+			this.nombreTipo = "(Azul)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
 			this.misilesRonda = 50;
@@ -51,7 +54,7 @@ public class Planeta {
 
 			break;
 		case 4: // Planeta Verde
-			this.nombreTipo = "(Planeta Verde,";
+			this.nombreTipo = "(Verde)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
 			this.misilesRonda = 50;
@@ -61,7 +64,7 @@ public class Planeta {
 
 			break;
 		case 5: // Planeta Gigante Gaseoso
-			this.nombreTipo = "(Planeta Gaseoso,";
+			this.nombreTipo = "(Gaseoso)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 400;
 			this.misilesRonda = 10;
@@ -70,7 +73,7 @@ public class Planeta {
 			this.misilesBase = this.misilesRonda;
 			break;
 		case 6: // Planeta Enano
-			this.nombreTipo = "(Planeta Enano,";
+			this.nombreTipo = "(Enano)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
 			this.misilesRonda = 50;
@@ -79,7 +82,7 @@ public class Planeta {
 			this.misilesBase = this.misilesRonda;
 			break;
 		case 7: // Planeta berserk
-			this.nombreTipo = "(Planeta Berserk,";
+			this.nombreTipo = "(Berserk)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
 			this.misilesRonda = 150;
@@ -88,7 +91,7 @@ public class Planeta {
 			this.misilesBase = this.misilesRonda;
 			break;
 		case 8: // Planeta Oscuro
-			this.nombreTipo = "(Planeta Oscuro,";
+			this.nombreTipo = "(Oscuro)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
 			this.misilesRonda = 70;
@@ -98,7 +101,7 @@ public class Planeta {
 			break;
 
 		case 9: // Planeta Vegeta Super Saiyan 2
-			this.nombreTipo = "(Planeta Vegeta Super Saiyan 21,";
+			this.nombreTipo = "(Vegeta Super Saiyan 2)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
 			this.misilesRonda = 50;
@@ -107,7 +110,7 @@ public class Planeta {
 			this.misilesBase = this.misilesRonda;
 			break;
 		case 10: // Planeta Nigromante
-			this.nombreTipo = "(Planeta Nigromante,";
+			this.nombreTipo = "(Nigromante)";
 			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 175;
 			this.misilesRonda = 40;
@@ -120,24 +123,49 @@ public class Planeta {
 
 	}
 
-	public void condicionesTipos(int tipoPlaneta, int numRonda,int misilesEleccion, int vidas) {
+	public void condicionesTipos(int numRonda,int misilesEleccion, int vidas) {
 		
+	}
+	
+	public int ventajasColores(int tipoObjetivo, int misilesEleccion) {
+		if (this.tipoPlaneta == 2) { //Condiciones equipo rojo
+			if (tipoObjetivo == 4) { //Equipo verde, atk*2
+				misilesEleccion = misilesEleccion * 2;
+			} else if (tipoObjetivo == 3) { //Equipo azul, atk/2
+				misilesEleccion = misilesEleccion / 2;
+			}
+		}
 		
-
+		if (this.tipoPlaneta == 3) { //Condiciones equipo azul
+			if (tipoObjetivo == 2) { //Equipo rojo, atk*2
+				misilesEleccion = misilesEleccion * 2;
+			} else if (tipoObjetivo == 4) { //Equipo verde, atk/2
+				misilesEleccion = misilesEleccion / 2;
+			}
+		}
+		
+		if (this.tipoPlaneta == 4) { //Condiciones equipo verde
+			if (tipoObjetivo == 3) { //Equipo azul, atk*2
+				misilesEleccion = misilesEleccion * 2;
+			} else if (tipoObjetivo == 2) { //Equipo rojo, atk/2
+				misilesEleccion = misilesEleccion / 2;
+			}
+		}
+		return misilesEleccion;
 	}
 	
 
 	public int calcularDmg(int misiles) {
 		if (misiles >= misilesDefensa) {
 			this.vidas = this.vidas - misiles + this.misilesDefensa;
-			misilesDefensa = 0;
-
 		} else {
 			return this.vidas;
 		}
 		if (this.vidas < 0) {
 			this.vidas = 0;
 		}
+		misilesDefensa = 0;
+		
 		return this.vidas;
 	}
 
@@ -175,8 +203,6 @@ public class Planeta {
 	public void introducirAtaque(int cantidadAtaque) {
 
 		this.cantidadAtk.add(cantidadAtaque);
-		this.misilesDefensa = 0;
-
 	}
 
 	public void resetArrays() {
@@ -242,12 +268,18 @@ public class Planeta {
 		this.misilesDefensa = misilesDefensa;
 	}
 
+	// POSICION DEL EQUIPO
 	public int getPosicionEquipo() {
 		return posicionEquipo;
 	}
 
 	public void setPosicionEquipo(int posicionEquipos) {
 		this.posicionEquipo = posicionEquipos;
+	}
+	
+	//TIPO DEL EQUIPO
+	public int getTipoPlaneta() {
+		return tipoPlaneta;
 	}
 
 	// Arraylist
