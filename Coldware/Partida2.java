@@ -49,7 +49,17 @@ public class Partida2 {
 				}
 
 			}
-			System.out.println("Selecciona el tipo de planeta:");
+			System.out.println("Selecciona un tipo de planeta:\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
 			tipoPlaneta = intScanner();
 			guardarEquipo = (new Planeta(x, nombre, tipoPlaneta));
 			equipos.add(guardarEquipo);
@@ -141,7 +151,7 @@ public class Partida2 {
 						} while (misilesEleccion <= 0 || misilesEleccion > equipos.get(x).getMisilesRonda());
 						
 						equipos.get(x).usarMisiles(misilesEleccion);
-						equipos.get(x).ventajasColores(tipoObjetivo, misilesEleccion);
+						misilesEleccion = equipos.get(x).ventajasColores(tipoObjetivo, misilesEleccion);
 						System.out.println(misilesEleccion);
 						equipos.get(x).introducirAtaque(misilesEleccion);
 
@@ -151,7 +161,7 @@ public class Partida2 {
 			}
 		}
 	}
-
+	
 	public void efectosRonda() {
 
 		int x;
@@ -187,8 +197,8 @@ public class Partida2 {
 
 					equipos.get(x).calcularDmg(equipos.get(y).cantidadAtk.get(z)); // Comprueba la cantidad del ataque y
 																					// lo hace
-					System.out.println("El equipo " + equipos.get(y).getNombreEquipo() + " le ha atacado con "
-							+ equipos.get(y).cantidadAtk.get(z) + " missiles");
+					System.out.println("El equipo " + equipos.get(y).getNombreEquipo() + " le hace "
+							+ equipos.get(y).cantidadAtk.get(z) + " puntos de daño.");
 
 					noAtaque = false;
 
