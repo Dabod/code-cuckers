@@ -78,6 +78,7 @@ public class Partida2 {
 		int misilesEleccion;
 		int x = 0, y = 0, cont = 0;
 		int opcion = 0;
+		boolean errorFastigos = false;
 
 		for (x = 0; equipos.size() > x; x++) {
 
@@ -103,8 +104,22 @@ public class Partida2 {
 
 					opcion = intScanner();
 
-					while(opcion != cont) {
-						mierdadedefensa(opcion);
+					if (opcion < cont) {
+						while (equipos.get(opcion).isVivo() == false) {
+								System.out.println("No puedes atacar a un equipo muerto");
+								
+								opcion = intScanner();
+								System.out.println("cont: "+cont);
+								System.out.println("opcion: "+opcion);
+								if(opcion == cont) {
+									
+									System.out.println(opcion);
+									errorFastigos = true;
+								}
+						}
+						if(errorFastigos) {
+							opcion = cont;
+						}
 					}
 
 					// Comprobacion que no puedes atacarte a ti mismo
@@ -141,22 +156,6 @@ public class Partida2 {
 
 			}
 		}
-	}
-	
-	public int mierdadedefensa(int opcion) {
-		
-		do {
-			
-			if (equipos.get(opcion).isVivo() == false) {
-				System.out.println("No puedes atacar a un equipo muerto");
-				
-				
-			}
-
-		} while (equipos.get(opcion).isVivo() == false);
-		
-		return opcion;
-		
 	}
 
 	public void efectosRonda() {
