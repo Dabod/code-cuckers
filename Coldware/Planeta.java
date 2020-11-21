@@ -1,5 +1,9 @@
+import java.util.ArrayList;
+
 public class Planeta {
 	// Atributs
+	ArrayList<Integer> objetivos = new ArrayList<Integer>();
+	ArrayList<Integer> cantidadAtk = new ArrayList<Integer>();
 	private int numEquipos;
 	private String nombreEquipo;
 	private int vidas;
@@ -48,6 +52,27 @@ public class Planeta {
 	public int resetMisiles() {
 		this.misilesRonda = this.misilesBase;
 		return misilesRonda;
+	}
+	
+	//FUNCIONES ARRAYLIST
+	
+	public void introducirObjetivo(int objetivo){
+		
+		this.objetivos.add(objetivo);
+		
+	}
+	
+	public void introducirAtaque(int cantidadAtaque) {
+		
+		this.cantidadAtk.add(cantidadAtaque);
+		
+	}
+	
+	public void resetArrays() {
+		
+		this.objetivos.clear();
+		this.cantidadAtk.clear();
+		
 	}
 
 
@@ -114,6 +139,28 @@ public class Planeta {
 	public void setPosicionEquipo(int posicionEquipos) {
 		this.posicionEquipo = posicionEquipos;
 	}
+	
+	// Arraylist
+	
+	public ArrayList<Integer> getObjetivos() {
+		return objetivos;
+	}
+
+	public void setObjetivos(ArrayList<Integer> objetivos) {
+		this.objetivos = objetivos;
+	}
+
+	public ArrayList<Integer> getCantidadAtk() {
+		return cantidadAtk;
+	}
+
+	public void setCantidadAtk(ArrayList<Integer> cantidadAtk) {
+		this.cantidadAtk = cantidadAtk;
+	}
+	
+	
+
+
 
 	
 }

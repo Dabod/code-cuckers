@@ -50,91 +50,113 @@ public class Partida2 {
 			equipos.add(guardarNombre);
 
 			equipos.get(x).setPosicionEquipo(x);
-			
-			System.out.println(equipos.get(x).getNombreEquipo());
 
-			
-			
 		}
-		equiposVivos = equipos.size();
+
+		partida();
+
+	}
+
+	public void partida() {
+
 		do {
+			checkVivos(equiposVivos);
 			ronda();
 			efectosRonda();
 			checkVivos(equiposVivos);
-		} while (equiposVivos != 1 || equiposVivos != 0);
+		} while (equiposVivos != 1 && equiposVivos != 0);
 		if (equiposVivos == 1) {
 			mostrarGanador();
 		} else {
 			empate();
 		}
 		finalizarPartida();
+
 	}
 
 	public void ronda() {
-
-		
-		//Poner arrais dentro de planeta y hacer un sistema para que incluya el .clear();
-		//equipos.clear();
-		ArrayList<Integer> objetivos = new ArrayList<Integer>();
-
-		ArrayList<Integer> cantidadAtk = new ArrayList<Integer>();
-
-		Scanner teclado = new Scanner(System.in);
-
 		int misilesEleccion;
 		int x = 0, y = 0, cont = 0;
 		int opcion = 0;
 
 		for (x = 0; equipos.size() > x; x++) {
+
 			equipos.get(x).resetMisiles();
-			System.out.println("-->TURNO DE " + equipos.get(x).getNombreEquipo() + "<--");
-			while (equipos.get(x).getMisilesRonda() != 0) {
+			equipos.get(x).resetArrays();
 
-				System.out.println("Misiles disponibles: " + equipos.get(x).getMisilesRonda() + ".\n");
-				cont = 0;
-				for (y = 0; y < equipos.size(); y++) {
-					System.out.println("(" + y + ") " + equipos.get(y).getNombreEquipo() + " " + "("
-							+ equipos.get(y).getVidas() + " vidas)");
-					cont++;
-				}
-				System.out.println("(" + cont + ") Misiles Restantes a defensa.\n");
+			if (equipos.get(x).isVivo() == true) {
 
-				System.out.println("Introduce el numero del objetivo que quieres atacar o (" + (cont)
-						+ ") para poner los misiles restantes a defensa");
+				System.out.println("-->TURNO DE " + equipos.get(x).getNombreEquipo() + "<--");
+				while (equipos.get(x).getMisilesRonda() != 0) {
 
-				// Comprobacion que no puedes atacarte a ti mismo
-				do {
-					System.out.println("No puedes atacarte a ti mismo ");
+					System.out.println("Misiles disponibles: " + equipos.get(x).getMisilesRonda() + ".\n");
+					cont = 0;
+					for (y = 0; y < equipos.size(); y++) {
+						System.out.println("(" + y + ") " + equipos.get(y).getNombreEquipo() + " " + "("
+								+ equipos.get(y).getVidas() + " vidas)");
+						cont++;
+					}
+					System.out.println("(" + cont + ") Misiles Restantes a defensa.\n");
+
+					System.out.println("Introduce el numero del objetivo que quieres atacar o (" + (cont)
+							+ ") para poner los misiles restantes a defensa");
+
 					opcion = intScanner();
-				} while (opcion == equipos.get(x).getPosicionEquipo());
 
-				while (opcion > cont || opcion < 0) { // Error opcion no valida
-					System.out.println("¡Opcion no válida! Selecciona una opción de la lista.");
-					opcion = intScanner();
+					while(opcion != cont) {
+						mierdadedefensa(opcion);
+					}
+
+					// Comprobacion que no puedes atacarte a ti mismo
+					while (opcion == equipos.get(x).getPosicionEquipo()) {
+						System.out.println("No puedes atacarte a ti mismo ");
+						opcion = intScanner();
+					}
+
+					while (opcion > cont || opcion < 0) { // Error opcion no valida
+						System.out.println("¡Opcion no válida! Selecciona una opción de la lista.");
+						opcion = intScanner();
+					}
+
+					if (opcion == cont) {// Defensa todo
+						equipos.get(x).defender(equipos.get(x).getMisilesRonda());
+						equipos.get(x).usarMisiles(equipos.get(x).getMisilesRonda());
+
+					} else {
+
+						equipos.get(x).introducirObjetivo(opcion);
+
+						do {
+							System.out.println("¿Con cuantos misiles le vas a atacar?");
+							misilesEleccion = intScanner();
+							cantMisilesError(misilesEleccion, x);
+
+						} while (misilesEleccion <= 0 || misilesEleccion > equipos.get(x).getMisilesRonda());
+
+						equipos.get(x).usarMisiles(misilesEleccion);
+						equipos.get(x).introducirAtaque(misilesEleccion);
+
+					}
 				}
 
-				if (opcion == cont) {// Defensa todo
-					equipos.get(x).defender(equipos.get(x).getMisilesRonda());
-					equipos.get(x).usarMisiles(equipos.get(x).getMisilesRonda());
-
-				} else {
-					objetivos.add(opcion);
-					System.out.println(objetivos);
-
-					do {
-						System.out.println("¿Con cuantos misiles le vas a atacar?");
-						misilesEleccion = intScanner();
-						cantMisilesError(misilesEleccion, x);
-
-					} while (misilesEleccion <= 0 || misilesEleccion > equipos.get(x).getMisilesRonda());
-
-					equipos.get(x).usarMisiles(misilesEleccion);
-					cantidadAtk.add(misilesEleccion);
-					System.out.println(cantidadAtk);
-				}
 			}
-			
 		}
+	}
+	
+	public int mierdadedefensa(int opcion) {
+		
+		do {
+			
+			if (equipos.get(opcion).isVivo() == false) {
+				System.out.println("No puedes atacar a un equipo muerto");
+				
+				
+			}
+
+		} while (equipos.get(opcion).isVivo() == false);
+		
+		return opcion;
+		
 	}
 
 	public void efectosRonda() {
@@ -152,8 +174,39 @@ public class Partida2 {
 			} else {
 				System.out.println(equipos.get(x).getNombreEquipo() + " no se ha defendido.");
 			}
-			
+			hacerAtaques(x);
 
+		}
+
+	}
+
+	public void hacerAtaques(int x) {
+
+		int y; // Equipo atacante
+		int z; // Posicion de los arrays
+		boolean noAtaque = true;
+
+		for (y = 0; y < equipos.size(); y++) { // Recorre los posibles equipos atacantes
+
+			for (z = 0; z < equipos.get(y).objetivos.size(); z++) { // Recorre los arrays objetivos
+
+				if (equipos.get(y).objetivos.get(z) == x) { // Comprobamos si el equipo atacante esta atacando al equipo
+															// con posicion x
+
+					equipos.get(x).calcularDmg(equipos.get(y).cantidadAtk.get(z)); // Comprueba la cantidad del ataque y
+																					// lo hace
+					System.out.println("El equipo " + equipos.get(y).getNombreEquipo() + " a atacado a "
+							+ equipos.get(x).getNombreEquipo() + " con " + equipos.get(y).cantidadAtk.get(z)
+							+ " missiles");
+
+					noAtaque = false;
+
+				}
+
+			}
+		}
+		if (noAtaque) {
+			System.out.println("Nadie le ha atacado... ");
 		}
 
 	}
@@ -169,14 +222,18 @@ public class Partida2 {
 
 	public int checkVivos(int equiposVivos) {// Comprobarequiposvivos
 		int x;
+		int contVivos = 0;
 
 		for (x = 0; x < equipos.size(); x++) {
 			if (equipos.get(x).getVidas() > 0) {
 				equipos.get(x).setVivo(true);
-				this.equiposVivos++;
+				contVivos++;
+			} else {
+				equipos.get(x).setVivo(false);
+
 			}
 		}
-		return this.equiposVivos;
+		return this.equiposVivos = contVivos;
 	}
 
 	public void mostrarGanador() {
