@@ -4,10 +4,9 @@ import java.util.Scanner;
 // comprobar int partida1/main
 public class Partida2 {
 	private int x;
-	private int eleccion;
+	private int cantidadEquipos;
 	private int equiposVivos;
 	private int numRonda;
-	private String ganadorPartida;
 
 	private ArrayList<Planeta> equipos = new ArrayList<Planeta>();
 
@@ -25,8 +24,8 @@ public class Partida2 {
 		do {
 			System.out.println("Cuantos equipos van a jugar?");
 
-			eleccion = intScanner();
-			if (eleccion < 3) {
+			cantidadEquipos = intScanner();
+			if (cantidadEquipos < 3) {
 
 				System.out.println("Se necesita un minimo de 3 equipos.");
 				pocosEquipos = true;
@@ -37,7 +36,7 @@ public class Partida2 {
 
 		} while (pocosEquipos);
 
-		for (x = 0; x < eleccion; x++) {
+		for (x = 0; x < cantidadEquipos; x++) {
 			System.out.println("Introduce el nombre del Equipo " + x + ".");
 
 			nombre = teclado.nextLine();
@@ -56,27 +55,26 @@ public class Partida2 {
 			System.out.println("4) Planeta Verde:\n   200 de vida\n   50 misiles\n");
 			System.out.println("5) Planeta Gaseoso:\n   400 de vida\n   10 base + 10 misiles por ronda\n");
 			System.out.println("6) Planeta Enano:\n   100 de vida\n   50 misiles probabilidad de esquivar del 50%\n");
-			System.out.println(
-					"7) Planeta Berserker:\n   100 de vida\n   150 misiles maximo 100 misiles por objetivo \n");
+			System.out.println("7) Planeta Berserker:\n   100 de vida\n   150 misiles, no puede defenderse\n");
 			System.out.println(
 					"8) Planeta darkness:\n   200 de vida\n   50 misiles si el objetivo atacado tiene menos del 20% de vida daño x2\n");
 			System.out.println(
-					"9) Planeta Nigromante:\n   175 de vida\n   40 misiles al matar el objetivo puede sanarse 50 de vida y sumarse +25 misiles. \n");
+					"9) Planeta Nigromante:\n   175 de vida\n   40 misiles, si el objetivo atacado muere en ese turno consigue 1 zombi. /nZombi: +25 misiles, puede consumirse para curar 50 de vida.\n");
 			System.out.println(
-					"10) Planeta Vegeta:\n   100 de vida\n   50 misiles --> Ejemplo: +20 de vida al iniciar la partida  si tenemos 5 equipos se suma 100 de vida = 200 de vida. \n");
+					"10) Planeta Vegeta:\n   100 de vida\n   30 misiles --> Ejemplo: +20 de vida al iniciar la partida  si tenemos 5 equipos se suma 100 de vida = 200 de vida. \n");
 			System.out.println("Selecciona un tipo de planeta:\n");
 
 			tipoPlaneta = intScanner();
 			guardarEquipo = (new Planeta(x, nombre, tipoPlaneta));
 			equipos.add(guardarEquipo);
 
-			System.out.println(equipos.get(x).getTipoPlaneta());
-
-			System.out.println(equipos.get(x).getNombreEquipo());
-			System.out.println(equipos.get(x).getMisilesRonda());
-			System.out.println(equipos.get(x).getVidas());
+//			System.out.println(equipos.get(x).getTipoPlaneta());
+//
+//			System.out.println(equipos.get(x).getNombreEquipo());
+//			System.out.println(equipos.get(x).getMisilesRonda());
+//			System.out.println(equipos.get(x).getVidas());
 		}
-
+		
 		partida();
 
 	}
@@ -85,12 +83,12 @@ public class Partida2 {
 		numRonda = 0;
 
 		do {
-			checkVivos(equiposVivos);
+			checkVivos();
 			ronda();
 			efectosRonda();
-			checkVivos(equiposVivos);
-		} while (equiposVivos != 1 && equiposVivos != 0);
-		if (equiposVivos == 1) {
+			checkVivos();
+		} while (cantidadEquipos != 1 && cantidadEquipos != 0);
+		if (cantidadEquipos == 1) {
 			mostrarGanador();
 		} else {
 			empate();
@@ -110,8 +108,8 @@ public class Partida2 {
 		for (x = 0; equipos.size() > x; x++) {
 
 			equipos.get(x).resetMisiles(equipos.get(x).getTipoPlaneta());
-			equipos.get(x).resetArrays();
 			equipos.get(x).setPosicionEquipo(x);
+			equipos.get(x).resetArrays();
 			equipos.get(x).resetDefensa();
 
 			if (equipos.get(x).isVivo() == true) {
@@ -194,6 +192,7 @@ public class Partida2 {
 			}
 			hacerAtaques(x);
 		}
+		checkVivos();
 		eliminarEquipos();
 	}
 
@@ -241,16 +240,18 @@ public class Partida2 {
 		ArrayList<Integer> equiposElimin = new ArrayList<Integer>(); // Guarda la posición de los equipos eliminados.
 
 		for (x = 0; x < equipos.size(); x++) {
-			if (equipos.get(x).getVidas() == 0) {
-				equiposElimin.add(equipos.get(x).getPosicionEquipo());
+			if (equipos.get(x).isVivo() == false) {
+				equiposElimin.add(equipos.get(x).getPosicionEquipo()); // Guarda la posicion del equipo a eliminar en el array equiposElimin.
 				System.out.println("El equipo " + equipos.get(x).getNombreEquipo() + " ha sido eliminado.");
 			}
 		}
 		for (y = 0; y < equiposElimin.size(); y++) {
-			if (equipos.size() >= 2) {
 				pElimin = equiposElimin.get(y);
 				equipos.remove(pElimin);
-			}
+				cantidadEquipos--;
+		}
+		for(x = 0; x < equipos.size(); x++) {
+			equipos.get(x).setPosicionEquipo(x);
 		}
 	}
 
@@ -263,20 +264,15 @@ public class Partida2 {
 		return misilesEleccion;
 	}
 
-	public int checkVivos(int equiposVivos) {// Comprobarequiposvivos
+	public void checkVivos() {// Comprobarequiposvivos
 		int x;
-		int contVivos = 0;
 
 		for (x = 0; x < equipos.size(); x++) {
-			if (equipos.get(x).getVidas() > 0) {
-				equipos.get(x).setVivo(true);
-				contVivos++;
-			} else {
+			if (equipos.get(x).getVidas() == 0) {
 				equipos.get(x).setVivo(false);
-
 			}
+			System.out.println(equipos.get(x).getNombreMasTipo()+"");
 		}
-		return this.equiposVivos = contVivos;
 	}
 
 	public int pasivaOscuro(int x, int opcion, int misilesEleccion) {
@@ -284,8 +280,8 @@ public class Partida2 {
 		float calculoOscuridad;
 
 		if (equipos.get(x).getTipoPlaneta() == 8) {
-					
-			calculoOscuridad = (float)equipos.get(opcion).getVidas() / (float)equipos.get(opcion).getVidasBase();
+
+			calculoOscuridad = (float) equipos.get(opcion).getVidas() / (float) equipos.get(opcion).getVidasBase();
 			System.out.println(calculoOscuridad);
 			if (calculoOscuridad * 100 <= 20) {
 				misilesEleccion = misilesEleccion * 2;
@@ -298,15 +294,15 @@ public class Partida2 {
 	}
 
 	public void mostrarGanador() {
-		int x;
+//		int x;
 
-		for (x = 0; x < equipos.size(); x++) {
-			if (equipos.get(x).isVivo()) {
-				ganadorPartida = equipos.get(x).getNombreEquipo();
-			}
-		}
-		System.out.println(
-				"¡El máximo campeón mundial súper guay de esta partida es... " + ganadorPartida + "!Sois loh mehore!");
+//		for (x = 0; x < equipos.size(); x++) {
+//			System.out.println(equipos.get(x).isVivo());
+//			if (equipos.get(x).isVivo()) {
+				System.out.println(
+						"¡El máximo campeón mundial súper guay de esta partida es... " + equipos.get(0).getNombreEquipo() + "!Sois loh mehore!");
+//			}
+//		}
 	}
 
 	public void empate() {

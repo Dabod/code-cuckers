@@ -22,6 +22,8 @@ public class Planeta {
 
 		this.nombreEquipo = nombre;
 		this.tipoPlaneta = tipoPlaneta;
+		this.numEquipos++;
+		this.vivo = true;
 
 		switch (tipoPlaneta) {
 		case 1: // Planeta Normal
@@ -30,9 +32,7 @@ public class Planeta {
 			this.vidas = 200;
 			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
-			this.numEquipos = x + 1;
 			this.misilesBase = this.misilesRonda;
-			this.vivo = true;
 
 			break;
 		case 2: // Planeta Rojo
@@ -41,9 +41,7 @@ public class Planeta {
 			this.vidas = 200;
 			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
-			this.numEquipos = x + 1;
 			this.misilesBase = this.misilesRonda;
-			this.vivo = true;
 
 			break;
 		case 3: // Planeta Azul
@@ -52,9 +50,7 @@ public class Planeta {
 			this.vidas = 200;
 			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
-			this.numEquipos = x + 1;
 			this.misilesBase = this.misilesRonda;
-			this.vivo = true;
 
 			break;
 		case 4: // Planeta Verde
@@ -63,9 +59,7 @@ public class Planeta {
 			this.vidas = 200;
 			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
-			this.numEquipos = x + 1;
 			this.misilesBase = this.misilesRonda;
-			this.vivo = true;
 
 			break;
 		case 5: // Planeta Gigante Gaseoso
@@ -74,8 +68,6 @@ public class Planeta {
 			this.vidas = 400;
 			this.vidaBase= this.vidas;
 			this.misilesRonda = 0;
-			this.numEquipos = x + 1;
-			this.vivo = true;
 			this.misilesBase = this.misilesRonda;
 			break;
 		case 6: // Planeta Enano
@@ -84,8 +76,6 @@ public class Planeta {
 			this.vidas = 100;
 			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
-			this.numEquipos = x + 1;
-			this.vivo = true;
 			this.misilesBase = this.misilesRonda;
 			break;
 		case 7: // Planeta berserk
@@ -94,8 +84,6 @@ public class Planeta {
 			this.vidas = 100;
 			this.vidaBase= this.vidas;
 			this.misilesRonda = 150;
-			this.numEquipos = x + 1;
-			this.vivo = true;
 			this.misilesBase = this.misilesRonda;
 			break;
 		case 8: // Planeta Oscuro
@@ -104,8 +92,6 @@ public class Planeta {
 			this.vidas = 200;
 			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
-			this.numEquipos = x + 1;
-			this.vivo = true;
 			this.misilesBase = this.misilesRonda;
 			break;
 
@@ -114,9 +100,7 @@ public class Planeta {
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
 			this.vidaBase= this.vidas;
-			this.misilesRonda = 50;
-			this.numEquipos = x + 1;
-			this.vivo = true;
+			this.misilesRonda = 30;
 			this.misilesBase = this.misilesRonda;
 			break;
 		case 10: // Planeta Nigromante
@@ -125,8 +109,6 @@ public class Planeta {
 			this.vidas = 175;
 			this.vidaBase= this.vidas;
 			this.misilesRonda = 40;
-			this.numEquipos = x + 1;
-			this.vivo = true;
 			this.misilesBase = this.misilesRonda;
 			break;
 
