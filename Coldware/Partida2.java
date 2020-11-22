@@ -49,11 +49,15 @@ public class Partida2 {
 			}
 
 			System.out.println("1) Planeta Normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("2) Planeta Rojo:\n   200 de vida\n   50 misiles\n   Ataques efectivos contra planeta verde (x2)\n   Poco efectivos contra planeta azul (/2)\n");
-			System.out.println("3) Planeta Azul:\n   200 de vida\n   50 misiles\n   Ataques efectivos contra planeta rojo (x2)\n   Poco efectivos contra planeta verde (/2)\n");
-			System.out.println("4) Planeta Verde:\n   200 de vida\n   50 misiles\n   Ataques efectivos contra planeta azul (x2)\n   Poco efectivos contra planeta rojo (/2)\n");
+			System.out.println(
+					"2) Planeta Rojo:\n   200 de vida\n   50 misiles\n   Ataques efectivos contra planeta verde (x2)\n   Poco efectivos contra planeta azul (/2)\n");
+			System.out.println(
+					"3) Planeta Azul:\n   200 de vida\n   50 misiles\n   Ataques efectivos contra planeta rojo (x2)\n   Poco efectivos contra planeta verde (/2)\n");
+			System.out.println(
+					"4) Planeta Verde:\n   200 de vida\n   50 misiles\n   Ataques efectivos contra planeta azul (x2)\n   Poco efectivos contra planeta rojo (/2)\n");
 			System.out.println("5) Planeta Gaseoso:\n   400 de vida\n   10 base + 10 misiles por ronda.\n");
-			System.out.println("6) Planeta Enano:\n   100 de vida\n   50 misiles --> probabilidad de esquivar del 50%.\n");
+			System.out.println(
+					"6) Planeta Enano:\n   100 de vida\n   50 misiles --> probabilidad de esquivar del 50%.\n");
 			System.out.println("7) Planeta Berserker:\n   100 de vida\n   150 misiles, no puede defenderse.\n");
 			System.out.println(
 					"8) Planeta Oscuro:\n   200 de vida\n   50 misiles --> Si el objetivo atacado tiene menos del 20% de vida daño x2.\n");
@@ -73,21 +77,20 @@ public class Partida2 {
 //			System.out.println(equipos.get(x).getMisilesRonda());
 //			System.out.println(equipos.get(x).getVidas());
 		}
-		
-		
+
 		partida();
 
 	}
 
 	public void partida() {
 		int x;
-		
-		for(x = 0; x < equipos.size(); x++) { // Comprobamos si debemos activar la pasiva Planeta Vegeta
+
+		for (x = 0; x < equipos.size(); x++) { // Comprobamos si debemos activar la pasiva Planeta Vegeta
 			equipos.get(x).pasivaVegeta(cantidadEquipos, equipos.get(x).getTipoPlaneta());
 		}
-		
+
 		numRonda = 0;
-		
+
 		do {
 			checkVivos();
 			ronda();
@@ -117,7 +120,7 @@ public class Partida2 {
 			equipos.get(x).setPosicionEquipo(x);
 			equipos.get(x).resetArrays();
 			equipos.get(x).resetDefensa();
-			
+
 			if (equipos.get(x).getTipoPlaneta() == 10) {
 				equipos.get(x).pasivaNigromante(equiposMuertos);
 				equipos.get(x).resetMisiles(10);
@@ -248,25 +251,33 @@ public class Partida2 {
 	public void eliminarEquipos() { // EL ULTIMO EQUIPO SE ELIMINA Y EL PENULTIMO NO, AUNQUE ESTE MUERTO
 		int x; // Recorre los equipos
 		int y; // Recorre el array pElimin.
-		int pElimin; // Guarda la posicion del equipo a eliminar desde el array equiposElimin.
+		int pElimin;
+		// Guarda la posicion del equipo a eliminar desde el array equiposElimin.
 		ArrayList<Integer> equiposElimin = new ArrayList<Integer>(); // Guarda la posición de los equipos eliminados.
 
-		for (x = 0; x < equipos.size(); x++) {
-			if (equipos.get(x).isVivo() == false) {
+		for (x = equipos.size() -1 ; x > 0; x--) {
+
+			if (!equipos.get(x).isVivo()) {
 				equiposElimin.add(equipos.get(x).getPosicionEquipo()); // Guarda la posicion del equipo a eliminar en el
 																		// array equiposElimin.
 				System.out.println("El equipo " + equipos.get(x).getNombreEquipo() + " ha sido eliminado.");
 			}
+			
+
 		}
+		
+		cantidadEquipos--;
+		equiposMuertos++;
+		
 		for (y = 0; y < equiposElimin.size(); y++) {
-			pElimin = equiposElimin.get(y);
-			equipos.remove(pElimin);
-			cantidadEquipos--;
-			equiposMuertos++;
+			
+				pElimin = equiposElimin.get(y);
+				equipos.remove(pElimin);
+
+				
+			
 		}
-		for (x = 0; x < equipos.size(); x++) {
-			equipos.get(x).setPosicionEquipo(x);
-		}
+
 	}
 
 	public int cantMisilesError(int misilesEleccion, int x) {
@@ -282,7 +293,7 @@ public class Partida2 {
 		int x;
 
 		for (x = 0; x < equipos.size(); x++) {
-			if (equipos.get(x).getVidas() == 0) {
+			if (equipos.get(x).getVidas() <= 0) {
 				equipos.get(x).setVivo(false);
 			}
 		}
