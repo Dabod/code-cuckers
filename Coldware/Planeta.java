@@ -6,16 +6,17 @@ public class Planeta {
 	ArrayList<Integer> cantidadAtk = new ArrayList<Integer>();
 	private int numEquipos;
 	private int vidas;
+	private int vidaBase;
 	private int misilesRonda;
 	private int misilesBase;
 	private int misilesDefensa;
 	private int posicionEquipo;
 	private int tipoPlaneta;
-	
 
 	private boolean vivo;
 	private String nombreEquipo;
 	private String nombreTipo;
+	private String nombreMasTipo;
 
 	public Planeta(int x, String nombre, int tipoPlaneta) {
 
@@ -25,8 +26,9 @@ public class Planeta {
 		switch (tipoPlaneta) {
 		case 1: // Planeta Normal
 			this.nombreTipo = "(Normal)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
+			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
 			this.numEquipos = x + 1;
 			this.misilesBase = this.misilesRonda;
@@ -35,8 +37,9 @@ public class Planeta {
 			break;
 		case 2: // Planeta Rojo
 			this.nombreTipo = "(Rojo)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
+			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
 			this.numEquipos = x + 1;
 			this.misilesBase = this.misilesRonda;
@@ -45,8 +48,9 @@ public class Planeta {
 			break;
 		case 3: // Planeta Azul
 			this.nombreTipo = "(Azul)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
+			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
 			this.numEquipos = x + 1;
 			this.misilesBase = this.misilesRonda;
@@ -55,8 +59,9 @@ public class Planeta {
 			break;
 		case 4: // Planeta Verde
 			this.nombreTipo = "(Verde)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
+			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
 			this.numEquipos = x + 1;
 			this.misilesBase = this.misilesRonda;
@@ -65,17 +70,19 @@ public class Planeta {
 			break;
 		case 5: // Planeta Gigante Gaseoso
 			this.nombreTipo = "(Gaseoso)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 400;
-			this.misilesRonda = 10;
+			this.vidaBase= this.vidas;
+			this.misilesRonda = 0;
 			this.numEquipos = x + 1;
 			this.vivo = true;
 			this.misilesBase = this.misilesRonda;
 			break;
 		case 6: // Planeta Enano
 			this.nombreTipo = "(Enano)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
+			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
 			this.numEquipos = x + 1;
 			this.vivo = true;
@@ -83,8 +90,9 @@ public class Planeta {
 			break;
 		case 7: // Planeta berserk
 			this.nombreTipo = "(Berserk)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
+			this.vidaBase= this.vidas;
 			this.misilesRonda = 150;
 			this.numEquipos = x + 1;
 			this.vivo = true;
@@ -92,9 +100,10 @@ public class Planeta {
 			break;
 		case 8: // Planeta Oscuro
 			this.nombreTipo = "(Oscuro)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
-			this.misilesRonda = 70;
+			this.vidaBase= this.vidas;
+			this.misilesRonda = 50;
 			this.numEquipos = x + 1;
 			this.vivo = true;
 			this.misilesBase = this.misilesRonda;
@@ -102,8 +111,9 @@ public class Planeta {
 
 		case 9: // Planeta Vegeta Super Saiyan 2
 			this.nombreTipo = "(Vegeta Super Saiyan 2)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
+			this.vidaBase= this.vidas;
 			this.misilesRonda = 50;
 			this.numEquipos = x + 1;
 			this.vivo = true;
@@ -111,8 +121,9 @@ public class Planeta {
 			break;
 		case 10: // Planeta Nigromante
 			this.nombreTipo = "(Nigromante)";
-			this.nombreEquipo = this.nombreEquipo + " " + nombreTipo;
+			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 175;
+			this.vidaBase= this.vidas;
 			this.misilesRonda = 40;
 			this.numEquipos = x + 1;
 			this.vivo = true;
@@ -123,37 +134,44 @@ public class Planeta {
 
 	}
 
-	public void condicionesTipos(int numRonda,int misilesEleccion, int vidas) {
-		
-	}
-	
 	public int ventajasColores(int tipoObjetivo, int misilesEleccion) {
-		if (this.tipoPlaneta == 2) { //Condiciones equipo rojo
-			if (tipoObjetivo == 4) { //Equipo verde, atk*2
+		if (this.tipoPlaneta == 2) { // Condiciones equipo rojo
+			if (tipoObjetivo == 4) { // Equipo verde, atk*2
 				misilesEleccion = misilesEleccion * 2;
-			} else if (tipoObjetivo == 3) { //Equipo azul, atk/2
+			} else if (tipoObjetivo == 3) { // Equipo azul, atk/2
 				misilesEleccion = misilesEleccion / 2;
 			}
 		}
-		
-		if (this.tipoPlaneta == 3) { //Condiciones equipo azul
-			if (tipoObjetivo == 2) { //Equipo rojo, atk*2
+
+		if (this.tipoPlaneta == 3) { // Condiciones equipo azul
+			if (tipoObjetivo == 2) { // Equipo rojo, atk*2
 				misilesEleccion = misilesEleccion * 2;
-			} else if (tipoObjetivo == 4) { //Equipo verde, atk/2
+			} else if (tipoObjetivo == 4) { // Equipo verde, atk/2
 				misilesEleccion = misilesEleccion / 2;
 			}
 		}
-		
-		if (this.tipoPlaneta == 4) { //Condiciones equipo verde
-			if (tipoObjetivo == 3) { //Equipo azul, atk*2
+
+		if (this.tipoPlaneta == 4) { // Condiciones equipo verde
+			if (tipoObjetivo == 3) { // Equipo azul, atk*2
 				misilesEleccion = misilesEleccion * 2;
-			} else if (tipoObjetivo == 2) { //Equipo rojo, atk/2
+			} else if (tipoObjetivo == 2) { // Equipo rojo, atk/2
 				misilesEleccion = misilesEleccion / 2;
 			}
 		}
+
 		return misilesEleccion;
 	}
-	
+
+	public int planetaEnano() {
+
+		int chanceEsquivar;
+		int min = 0;
+		int max = 1;
+
+		chanceEsquivar = (int) (Math.random() * (max - min + 1)) + min;
+
+		return chanceEsquivar;
+	}
 
 	public int calcularDmg(int misiles) {
 		if (misiles >= misilesDefensa) {
@@ -165,7 +183,7 @@ public class Planeta {
 			this.vidas = 0;
 		}
 		misilesDefensa = 0;
-		
+
 		return this.vidas;
 	}
 
@@ -182,9 +200,15 @@ public class Planeta {
 		return this.misilesRonda;
 	}
 
-	public int resetMisiles() {
-		this.misilesRonda = this.misilesBase;
-		return misilesRonda;
+	public void resetMisiles(int tipoPlaneta) {
+		if (tipoPlaneta == 5) {
+			this.misilesBase = this.misilesBase + 10;
+			this.misilesRonda = this.misilesBase;
+
+		} else {
+			this.misilesRonda = this.misilesBase;
+
+		}
 	}
 
 	public int resetDefensa() {
@@ -276,10 +300,18 @@ public class Planeta {
 	public void setPosicionEquipo(int posicionEquipos) {
 		this.posicionEquipo = posicionEquipos;
 	}
-	
-	//TIPO DEL EQUIPO
+
+	// TIPO DEL EQUIPO
 	public int getTipoPlaneta() {
 		return tipoPlaneta;
+	}
+
+	public String getNombreMasTipo() {
+		return nombreMasTipo;
+	}
+	
+	public int getVidasBase() {
+		return this.vidaBase;
 	}
 
 	// Arraylist

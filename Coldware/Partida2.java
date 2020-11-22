@@ -16,7 +16,7 @@ public class Partida2 {
 		int x;
 		int tipoPlaneta = 0;
 		boolean pocosEquipos;
-		String nombre = null;
+		String nombre;
 
 		Planeta guardarEquipo;
 
@@ -49,23 +49,29 @@ public class Partida2 {
 				}
 
 			}
+
+			System.out.println("1) Planeta Normal:\n   200 de vida\n   50 misiles\n");
+			System.out.println("2) Planeta Rojo:\n   200 de vida\n   50 misiles\n");
+			System.out.println("3) Planeta Azul:\n   200 de vida\n   50 misiles\n");
+			System.out.println("4) Planeta Verde:\n   200 de vida\n   50 misiles\n");
+			System.out.println("5) Planeta Gaseoso:\n   400 de vida\n   10 base + 10 misiles por ronda\n");
+			System.out.println("6) Planeta Enano:\n   100 de vida\n   50 misiles probabilidad de esquivar del 50%\n");
+			System.out.println(
+					"7) Planeta Berserker:\n   100 de vida\n   150 misiles maximo 100 misiles por objetivo \n");
+			System.out.println(
+					"8) Planeta darkness:\n   200 de vida\n   50 misiles si el objetivo atacado tiene menos del 20% de vida daño x2\n");
+			System.out.println(
+					"9) Planeta Nigromante:\n   175 de vida\n   40 misiles al matar el objetivo puede sanarse 50 de vida y sumarse +25 misiles. \n");
+			System.out.println(
+					"10) Planeta Vegeta:\n   100 de vida\n   50 misiles --> Ejemplo: +20 de vida al iniciar la partida  si tenemos 5 equipos se suma 100 de vida = 200 de vida. \n");
 			System.out.println("Selecciona un tipo de planeta:\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
-			System.out.println("1) Planeta normal:\n   200 de vida\n   50 misiles\n");
+
 			tipoPlaneta = intScanner();
 			guardarEquipo = (new Planeta(x, nombre, tipoPlaneta));
 			equipos.add(guardarEquipo);
-			
+
 			System.out.println(equipos.get(x).getTipoPlaneta());
-			
+
 			System.out.println(equipos.get(x).getNombreEquipo());
 			System.out.println(equipos.get(x).getMisilesRonda());
 			System.out.println(equipos.get(x).getVidas());
@@ -103,7 +109,7 @@ public class Partida2 {
 		System.out.println("\n\nRONDA " + numRonda);
 		for (x = 0; equipos.size() > x; x++) {
 
-			equipos.get(x).resetMisiles();
+			equipos.get(x).resetMisiles(equipos.get(x).getTipoPlaneta());
 			equipos.get(x).resetArrays();
 			equipos.get(x).setPosicionEquipo(x);
 			equipos.get(x).resetDefensa();
@@ -112,10 +118,14 @@ public class Partida2 {
 
 				System.out.println("\n-->TURNO DE " + equipos.get(x).getNombreEquipo() + "<--");
 				while (equipos.get(x).getMisilesRonda() != 0) {
+					if (equipos.get(x).getTipoPlaneta() == 5 && numRonda > 1) {
+						System.out.println(equipos.get(x).getNombreMasTipo() + " crece...");
+					}
 					System.out.println("Misiles disponibles: " + equipos.get(x).getMisilesRonda() + ".\n");
 
 					for (y = 0; y < equipos.size(); y++) {
-						System.out.println("(" + y + ") " + equipos.get(y).getNombreEquipo() + " ---> HP: " + equipos.get(y).getVidas());
+						System.out.println("(" + y + ") " + equipos.get(y).getNombreMasTipo() + " ---> HP: "
+								+ equipos.get(y).getVidas());
 					}
 					System.out.println("(" + cont + ") Misiles Restantes a defensa.\n");
 
@@ -136,8 +146,13 @@ public class Partida2 {
 					}
 
 					if (opcion == cont) {// Defensa todo
-						equipos.get(x).defender(equipos.get(x).getMisilesRonda());
-						equipos.get(x).usarMisiles(equipos.get(x).getMisilesRonda());
+						if (equipos.get(x).getTipoPlaneta() != 7) {
+
+							equipos.get(x).defender(equipos.get(x).getMisilesRonda());
+							equipos.get(x).usarMisiles(equipos.get(x).getMisilesRonda());
+						} else {
+							System.out.println("AAAAAAAAAAH! *Inserte musica de DOOM* (No te puedes defender)\n");
+						}
 
 					} else {
 						equipos.get(x).introducirObjetivo(opcion);
@@ -149,19 +164,19 @@ public class Partida2 {
 							cantMisilesError(misilesEleccion, x);
 
 						} while (misilesEleccion <= 0 || misilesEleccion > equipos.get(x).getMisilesRonda());
-						
+
 						equipos.get(x).usarMisiles(misilesEleccion);
-						misilesEleccion = equipos.get(x).ventajasColores(tipoObjetivo, misilesEleccion);
+						misilesEleccion = pasivaOscuro(x, opcion, misilesEleccion);
+						equipos.get(x).ventajasColores(tipoObjetivo, misilesEleccion);
 						System.out.println(misilesEleccion);
 						equipos.get(x).introducirAtaque(misilesEleccion);
-
 					}
 				}
 
 			}
 		}
 	}
-	
+
 	public void efectosRonda() {
 
 		int x;
@@ -195,10 +210,17 @@ public class Partida2 {
 				if (equipos.get(y).objetivos.get(z) == x) { // Comprobamos si el equipo atacante esta atacando al equipo
 															// con posicion x
 
-					equipos.get(x).calcularDmg(equipos.get(y).cantidadAtk.get(z)); // Comprueba la cantidad del ataque y
-																					// lo hace
-					System.out.println("El equipo " + equipos.get(y).getNombreEquipo() + " le hace "
-							+ equipos.get(y).cantidadAtk.get(z) + " puntos de daño.");
+					System.out.println("El equipo " + equipos.get(y).getNombreEquipo() + " le ha atacado con "
+							+ equipos.get(y).cantidadAtk.get(z) + " missiles");
+
+					if (equipos.get(x).getTipoPlaneta() == 6 && equipos.get(x).planetaEnano() == 1) {
+						System.out.println("Eres jodido matrix (esquivas todos los ataques)");
+
+					} else {
+						equipos.get(x).calcularDmg(equipos.get(y).cantidadAtk.get(z)); // Comprueba la cantidad del
+																						// ataque y lo hace
+
+					}
 
 					noAtaque = false;
 
@@ -231,33 +253,6 @@ public class Partida2 {
 			}
 		}
 	}
-	
-//	public int ventajasColores(int tipoObjetivo, int misilesEleccion) {
-//		if (tipoObjetivo == 2) { //Condiciones equipo rojo
-//			if (tipoObjetivo == 4) { //Equipo verde, atk*2
-//				misilesEleccion = misilesEleccion * 2;
-//			} else if (tipoObjetivo == 3) { //Equipo azul, atk/2
-//				misilesEleccion = misilesEleccion / 2;
-//			}
-//		}
-//		
-//		if (tipoObjetivo == 3) { //Condiciones equipo azul
-//			if (tipoObjetivo == 2) { //Equipo rojo, atk*2
-//				misilesEleccion = misilesEleccion * 2;
-//			} else if (tipoObjetivo == 4) { //Equipo verde, atk/2
-//				misilesEleccion = misilesEleccion / 2;
-//			}
-//		}
-//		
-//		if (tipoObjetivo == 4) { //Condiciones equipo verde
-//			if (tipoObjetivo == 3) { //Equipo azul, atk*2
-//				misilesEleccion = misilesEleccion * 2;
-//			} else if (tipoObjetivo == 2) { //Equipo rojo, atk/2
-//				misilesEleccion = misilesEleccion / 2;
-//			}
-//		}
-//		return misilesEleccion;
-//	}
 
 	public int cantMisilesError(int misilesEleccion, int x) {
 		if (misilesEleccion <= 0) {
@@ -282,6 +277,25 @@ public class Partida2 {
 			}
 		}
 		return this.equiposVivos = contVivos;
+	}
+
+	public int pasivaOscuro(int x, int opcion, int misilesEleccion) {
+
+		float calculoOscuridad;
+
+		if (equipos.get(x).getTipoPlaneta() == 8) {
+			System.out.println("vidas base " + equipos.get(opcion).getVidasBase());
+			System.out.println("vidas " + equipos.get(opcion).getVidas());
+			calculoOscuridad = equipos.get(opcion).getVidas() / equipos.get(opcion).getVidasBase();
+			System.out.println(calculoOscuridad);
+			if (calculoOscuridad * 100 <= 20) {
+				misilesEleccion = misilesEleccion * 2;
+				System.out.println();
+			}
+
+		}
+
+		return misilesEleccion;
 	}
 
 	public void mostrarGanador() {

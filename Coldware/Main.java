@@ -21,7 +21,7 @@ public class Main {
 		System.out.println("| |_   \\____/\\___/\\_____/___/    \\/  \\/\\_| |_/\\_| \\_|  _| |");
 		System.out.println("|___|                                                 |___|");
 		System.out.println("                                                           ");
-		//partida.parar(3000);
+		//1partida.parar(3000);
 
 		while (opcionMenu != 0) {
 			System.out.println("\n1 - Jugar\n");
