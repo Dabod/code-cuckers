@@ -8,7 +8,7 @@ public class Main {
 		int opcionMenu = -1;
 
 		Scanner teclado = new Scanner(System.in);
-		//Partida partida = new Partida();
+		// Partida partida = new Partida();
 		Partida partida = new Partida();
 
 
@@ -21,7 +21,7 @@ public class Main {
 		System.out.println("| |_   \\____/\\___/\\_____/___/    \\/  \\/\\_| |_/\\_| \\_|  _| |");
 		System.out.println("|___|                                                 |___|");
 		System.out.println("                                                           ");
-		//1partida.parar(3000);
+		partida.parar(3000);
 
 		while (opcionMenu != 0) {
 			System.out.println("\n1 - Jugar\n");
@@ -42,8 +42,8 @@ public class Main {
 				System.out.println("0 - Salir");
 				System.out.println("\nElige una opción del menú introduciendo el número correspondiente:\n");
 				opcionMenu = partida.intScanner();
-
 			}
+			
 			switch (opcionMenu) {
 			case 1:
 				partida.iniciarpartida2();
@@ -56,14 +56,14 @@ public class Main {
 				break;
 			case 4:
 				partida.opcionesReproductor();
-				System.out.println("WIP");
 				break;
 			case 0:
 				System.out.println("¡¡¡ADIÓS MUY BUENAS!!!");
 				break;
 			}
 		}
+		
 		System.out.println("Fin del programa.");
 		teclado.close();
 	}
-}
+} // Nice
