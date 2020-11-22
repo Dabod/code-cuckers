@@ -90,14 +90,12 @@ public class Partida2 {
 		}
 
 		numRonda = 0;
-
 		do {
-			checkVivos();
+
 			ronda();
 			efectosRonda();
-			checkVivos();
-		} while (cantidadEquipos != 1 && cantidadEquipos != 0);
-		if (cantidadEquipos == 1) {
+		} while (equipos.size() != 1 && equipos.size() != 0);
+		if (equipos.size() == 1) {
 			mostrarGanador();
 		} else {
 			empate();
@@ -207,8 +205,9 @@ public class Partida2 {
 			}
 			hacerAtaques(x);
 		}
-		checkVivos();
+
 		eliminarEquipos();
+
 	}
 
 	public void hacerAtaques(int x) { // CREAR VARIABLE ATAQUE TOTAL PARA LA CORRECTA APLICACIÓN DE LA DEFENSA
@@ -255,27 +254,21 @@ public class Partida2 {
 		// Guarda la posicion del equipo a eliminar desde el array equiposElimin.
 		ArrayList<Integer> equiposElimin = new ArrayList<Integer>(); // Guarda la posición de los equipos eliminados.
 
-		for (x = equipos.size() -1 ; x > 0; x--) {
+		for (x = equipos.size() - 1; x >= 0; x--) {
 
 			if (!equipos.get(x).isVivo()) {
-				equiposElimin.add(equipos.get(x).getPosicionEquipo()); // Guarda la posicion del equipo a eliminar en el
-																		// array equiposElimin.
+				equiposElimin.add(x); // Guarda la posicion del equipo a eliminar en el
+										// array equiposElimin.
 				System.out.println("El equipo " + equipos.get(x).getNombreEquipo() + " ha sido eliminado.");
 			}
-			
 
 		}
-		
-		cantidadEquipos--;
-		equiposMuertos++;
-		
-		for (y = 0; y < equiposElimin.size(); y++) {
-			
-				pElimin = equiposElimin.get(y);
-				equipos.remove(pElimin);
 
-				
-			
+		for (y = 0; y < equiposElimin.size(); y++) {
+
+			pElimin = equiposElimin.get(y);
+			equipos.remove(pElimin);
+			equiposMuertos++;
 		}
 
 	}
@@ -287,16 +280,6 @@ public class Partida2 {
 			System.out.println("Misiles insuficientes.");
 		}
 		return misilesEleccion;
-	}
-
-	public void checkVivos() {// Comprobarequiposvivos
-		int x;
-
-		for (x = 0; x < equipos.size(); x++) {
-			if (equipos.get(x).getVidas() <= 0) {
-				equipos.get(x).setVivo(false);
-			}
-		}
 	}
 
 	public int pasivaOscuro(int x, int opcion, int misilesEleccion) {

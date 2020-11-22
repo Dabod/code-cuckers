@@ -257,7 +257,7 @@ public class Planeta {
 
 	// PROPIEDAD VIVO
 	public boolean isVivo() {
-		return vivo;
+		return vidas > 0;
 	}
 
 	public void setVivo(boolean vivo) {
