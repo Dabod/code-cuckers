@@ -1,2 +1,2 @@
 # code-cuckers
-Cold War Alba-Valdivia-Paz
+Este programa es la versión final de la segunda entrega de Cold War. De David Alba, Marc Valdivia y Sergi Paz.
