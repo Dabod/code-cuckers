@@ -346,4 +346,5 @@ public class Planeta {
 		this.cantidadAtk = cantidadAtk;
 	}
 
+	
 }

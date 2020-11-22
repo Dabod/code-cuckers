@@ -9,7 +9,7 @@ public class Main {
 
 		Scanner teclado = new Scanner(System.in);
 		//Partida partida = new Partida();
-		Partida2 partida2 = new Partida2();
+		Partida partida = new Partida();
 
 
 		System.out.println("Bienvenido/a a");
@@ -30,7 +30,7 @@ public class Main {
 			System.out.println("4 - Opciones Musica\n");
 			System.out.println("0 - Salir");
 			System.out.println("\nElige una opción del menú introduciendo el número correspondiente:\n");
-			opcionMenu = partida2.intScanner();
+			opcionMenu = partida.intScanner();
 			while (opcionMenu < 0 || opcionMenu > 4) {
 				System.err.println(
 						"!Opción invalida! Asegurate de escoger un número correspondiente a alguna opción del menú.");
@@ -41,21 +41,21 @@ public class Main {
 				System.out.println("4 - Opciones Musica\n");
 				System.out.println("0 - Salir");
 				System.out.println("\nElige una opción del menú introduciendo el número correspondiente:\n");
-				opcionMenu = partida2.intScanner();
+				opcionMenu = partida.intScanner();
 
 			}
 			switch (opcionMenu) {
 			case 1:
-				partida2.iniciarpartida2();
+				partida.iniciarpartida2();
 				break;
 			case 2:
-				//partida.reglasJuego();
+				partida.reglasJuego();
 				break;
 			case 3:
-				//partida.infoJuego();
+				partida.infoJuego();
 				break;
 			case 4:
-				//partida.opcionesReproductor();
+				partida.opcionesReproductor();
 				System.out.println("WIP");
 				break;
 			case 0:
