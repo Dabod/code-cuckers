@@ -6,7 +6,7 @@ public class Planeta {
 	ArrayList<Integer> cantidadAtk = new ArrayList<Integer>();
 	private int numEquipos;
 	private int vidas;
-	private int vidaBase;
+	private int vidasBase;
 	private int misilesRonda;
 	private int misilesBase;
 	private int misilesDefensa;
@@ -30,7 +30,7 @@ public class Planeta {
 			this.nombreTipo = "(Normal)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
-			this.vidaBase= this.vidas;
+			this.vidasBase = this.vidas;
 			this.misilesRonda = 50;
 			this.misilesBase = this.misilesRonda;
 
@@ -39,7 +39,7 @@ public class Planeta {
 			this.nombreTipo = "(Rojo)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
-			this.vidaBase= this.vidas;
+			this.vidasBase = this.vidas;
 			this.misilesRonda = 50;
 			this.misilesBase = this.misilesRonda;
 
@@ -48,7 +48,7 @@ public class Planeta {
 			this.nombreTipo = "(Azul)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
-			this.vidaBase= this.vidas;
+			this.vidasBase = this.vidas;
 			this.misilesRonda = 50;
 			this.misilesBase = this.misilesRonda;
 
@@ -57,7 +57,7 @@ public class Planeta {
 			this.nombreTipo = "(Verde)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
-			this.vidaBase= this.vidas;
+			this.vidasBase = this.vidas;
 			this.misilesRonda = 50;
 			this.misilesBase = this.misilesRonda;
 
@@ -66,7 +66,7 @@ public class Planeta {
 			this.nombreTipo = "(Gaseoso)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 400;
-			this.vidaBase= this.vidas;
+			this.vidasBase = this.vidas;
 			this.misilesRonda = 0;
 			this.misilesBase = this.misilesRonda;
 			break;
@@ -74,7 +74,7 @@ public class Planeta {
 			this.nombreTipo = "(Enano)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
-			this.vidaBase= this.vidas;
+			this.vidasBase = this.vidas;
 			this.misilesRonda = 50;
 			this.misilesBase = this.misilesRonda;
 			break;
@@ -82,7 +82,7 @@ public class Planeta {
 			this.nombreTipo = "(Berserk)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
-			this.vidaBase= this.vidas;
+			this.vidasBase = this.vidas;
 			this.misilesRonda = 150;
 			this.misilesBase = this.misilesRonda;
 			break;
@@ -90,7 +90,7 @@ public class Planeta {
 			this.nombreTipo = "(Oscuro)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 200;
-			this.vidaBase= this.vidas;
+			this.vidasBase = this.vidas;
 			this.misilesRonda = 50;
 			this.misilesBase = this.misilesRonda;
 			break;
@@ -99,7 +99,6 @@ public class Planeta {
 			this.nombreTipo = "(Vegeta Super Saiyan 2)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 100;
-			this.vidaBase= this.vidas;
 			this.misilesRonda = 30;
 			this.misilesBase = this.misilesRonda;
 			break;
@@ -107,7 +106,7 @@ public class Planeta {
 			this.nombreTipo = "(Nigromante)";
 			this.nombreMasTipo = this.nombreEquipo + " " + nombreTipo;
 			this.vidas = 175;
-			this.vidaBase= this.vidas;
+			this.vidasBase = this.vidas;
 			this.misilesRonda = 40;
 			this.misilesBase = this.misilesRonda;
 			break;
@@ -182,7 +181,8 @@ public class Planeta {
 		return this.misilesRonda;
 	}
 
-	public void resetMisiles(int tipoPlaneta) {
+	public void resetMisiles(int tipoPlaneta) { // Resetea los misiles para una nueva ronda y le otorga misiles extras a
+												// los planetas que lo necesiten.
 		if (tipoPlaneta == 5) {
 			this.misilesBase = this.misilesBase + 10;
 			this.misilesRonda = this.misilesBase;
@@ -190,6 +190,32 @@ public class Planeta {
 		} else {
 			this.misilesRonda = this.misilesBase;
 
+		}
+	}
+
+	public void pasivaNigromante(int equiposMuertos) { // Activa la pasiva de los planetas tipo Nigromante.
+		int x;
+
+		if (equiposMuertos > 0) {
+			for (x = 0; x < equiposMuertos; x++) {
+				this.misilesBase = this.misilesBase + 20;
+				this.vidas = this.vidas + 40;
+				System.out.println("El nigromante recibe 20 misiles y se cura 40 de vida por cada equipo muerto.");
+			}
+			if (this.vidas > this.vidasBase) { // No permitimos que se cure más de sus vidas base.
+				this.vidas = this.vidasBase;
+			}
+		}
+	}
+
+	public void pasivaVegeta(int cantidadEquipos, int tipoEquipo) { // Activa la pasiva del Planeta Vegeta
+		int x;
+		
+		if(tipoEquipo == 9) {
+			for(x = 0; x < (cantidadEquipos - 1); x++) {
+				this.vidas = this.vidas + 100;
+				this.misilesBase = this.misilesBase + 20;
+			}
 		}
 	}
 
@@ -288,12 +314,18 @@ public class Planeta {
 		return tipoPlaneta;
 	}
 
+	// NOMBRE DEL EQUIPO + TIPO
 	public String getNombreMasTipo() {
 		return nombreMasTipo;
 	}
-	
+
+	// NOMBRE DEL TIPO
+	public String getNombreTipo() {
+		return nombreTipo;
+	}
+
 	public int getVidasBase() {
-		return this.vidaBase;
+		return this.vidasBase;
 	}
 
 	// Arraylist

@@ -30,7 +30,7 @@ public class Main {
 			System.out.println("4 - Opciones Musica\n");
 			System.out.println("0 - Salir");
 			System.out.println("\nElige una opción del menú introduciendo el número correspondiente:\n");
-			opcionMenu = teclado.nextInt();
+			opcionMenu = partida2.intScanner();
 			while (opcionMenu < 0 || opcionMenu > 4) {
 				System.err.println(
 						"!Opción invalida! Asegurate de escoger un número correspondiente a alguna opción del menú.");
@@ -41,7 +41,7 @@ public class Main {
 				System.out.println("4 - Opciones Musica\n");
 				System.out.println("0 - Salir");
 				System.out.println("\nElige una opción del menú introduciendo el número correspondiente:\n");
-				opcionMenu = teclado.nextInt();
+				opcionMenu = partida2.intScanner();
 
 			}
 			switch (opcionMenu) {
