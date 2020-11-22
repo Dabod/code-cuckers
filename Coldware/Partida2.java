@@ -284,9 +284,8 @@ public class Partida2 {
 		float calculoOscuridad;
 
 		if (equipos.get(x).getTipoPlaneta() == 8) {
-			System.out.println("vidas base " + equipos.get(opcion).getVidasBase());
-			System.out.println("vidas " + equipos.get(opcion).getVidas());
-			calculoOscuridad = equipos.get(opcion).getVidas() / equipos.get(opcion).getVidasBase();
+					
+			calculoOscuridad = (float)equipos.get(opcion).getVidas() / (float)equipos.get(opcion).getVidasBase();
 			System.out.println(calculoOscuridad);
 			if (calculoOscuridad * 100 <= 20) {
 				misilesEleccion = misilesEleccion * 2;
