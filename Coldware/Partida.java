@@ -22,7 +22,7 @@ public class Partida {
 		Scanner teclado = new Scanner(System.in);
 
 		do {
-			System.out.println("Introduce el número de equipos que van a jugar.");
+			System.out.println("Introduce el nï¿½mero de equipos que van a jugar.");
 
 			cantidadEquipos = intScanner();
 			System.out.println(cantidadEquipos+" equipos seleccionados.");
@@ -44,7 +44,7 @@ public class Partida {
 
 			for (x = 0; x < equipos.size(); x++) {
 				while (equipos.get(x).getNombreEquipo().equals(nombre)) {
-					System.out.println("Nombre en uso. Introduce un nombre único.");
+					System.out.println("Nombre en uso. Introduce un nombre ï¿½nico.");
 					nombre = teclado.next();
 				}
 
@@ -64,7 +64,7 @@ public class Partida {
 					"6) Planeta Enano:\n   100 de vida\n   50 misiles --> probabilidad de esquivar del 50%.\n");
 			System.out.println("7) Planeta Berserk:\n   100 de vida\n   150 misiles, no puede defenderse.\n");
 			System.out.println(
-					"8) Planeta Oscuro:\n   200 de vida\n   50 misiles --> Si el objetivo atacado tiene menos del 20% de vida daño x2.\n");
+					"8) Planeta Oscuro:\n   200 de vida\n   50 misiles --> Si el objetivo atacado tiene menos del 20% de vida daï¿½o x2.\n");
 			System.out.println(
 					"9) Planeta Vegeta Super Saiyan 2:\n   100 de vida, +100 de vida extra por planeta en la partida.\n   30 misiles, +10 misiles extra por planeta en la partida.\n");
 			System.out.println(
@@ -118,7 +118,7 @@ public class Partida {
 			equipos.get(x).resetDefensa();
 
 			if (equipos.get(x).getTipoPlaneta() == 10) {
-				equipos.get(x).pasivaNigromante(equiposMuertos);
+				equipos.get(x).pasivaNigromante(equiposMuertos); // ESTA PASIVA DEBERÃA ACTIVARSE AL INICIO DE LA RONDA, NO AL ENTRAR EN EL TURNO
 				equipos.get(x).resetMisiles(10);
 				equiposMuertos = 0;
 			}
@@ -150,7 +150,7 @@ public class Partida {
 					}
 
 					while (opcion > cont || opcion < 0) { // Error opcion no valida
-						System.out.println("¡Opcion no válida! Selecciona una opción de la lista.");
+						System.out.println("ï¿½Opcion no vï¿½lida! Selecciona una opciï¿½n de la lista."); // UN EQUIPO PUEDE ATACARSE A SI MISMO SI ENTRA EN ESTE ERROR <-- SOLUCIONAR
 						opcion = intScanner();
 					}
 
@@ -169,14 +169,14 @@ public class Partida {
 						tipoObjetivo = equipos.get(opcion).getTipoPlaneta();
 
 						do {
-							System.out.println("¿Con cuantos misiles le vas a atacar?");
+							System.out.println("ï¿½Con cuantos misiles le vas a atacar?");
 							misilesEleccion = intScanner();
 							cantMisilesError(misilesEleccion, x);
 
 						} while (misilesEleccion <= 0 || misilesEleccion > equipos.get(x).getMisilesRonda());
 
 						equipos.get(x).usarMisiles(misilesEleccion);
-						misilesEleccion = pasivaOscuro(x, opcion, misilesEleccion);
+						misilesEleccion = pasivaOscuro(x, opcion, misilesEleccion); // FALTARIA MOSTRAR A LOS EQUIPOS OSCUROS CUANDO SE ACTIVA SU PASIVA (En la lista de objetivos)
 						equipos.get(x).ventajasColores(tipoObjetivo, misilesEleccion);
 						equipos.get(x).introducirAtaque(misilesEleccion);
 					}
@@ -190,7 +190,7 @@ public class Partida {
 
 		int x;
 
-		System.out.println("\n\n<-- RESULTADOS DE LA RONDA -->");
+		System.out.println("\n\n<-- RESULTADOS DE LA RONDA -->"); // FALTARIA MOSTRAR EL DAÃ‘O TOTAL (REAL) QUE RECIBE CADA EQUIPO Y LA VIDA CON LA QUE SE QUEDA
 		parar(1000);
 		for (x = 0; x < equipos.size(); x++) {
 			System.out.println("  ------------------------  ");
@@ -208,7 +208,7 @@ public class Partida {
 
 	}
 
-	public void hacerAtaques(int x) { // CREAR VARIABLE ATAQUE TOTAL PARA LA CORRECTA APLICACIÓN DE LA DEFENSA
+	public void hacerAtaques(int x) { // CREAR VARIABLE ATAQUE TOTAL PARA LA CORRECTA APLICACIï¿½N DE LA DEFENSA
 
 		int y; // Equipo atacante
 		int z; // Posicion de los arrays
@@ -225,7 +225,7 @@ public class Partida {
 							+ equipos.get(y).cantidadAtk.get(z) + " missiles");
 
 					if (equipos.get(x).getTipoPlaneta() == 6 && equipos.get(x).planetaEnano() == 1) {
-						System.out.println(equipos.get(x).getNombreEquipo()+" es jodido matrix (¡Esquiva el ataque!)\n");
+						System.out.println(equipos.get(x).getNombreEquipo()+" es jodido matrix (ï¿½Esquiva el ataque!)\n");
 					} else {
 						equipos.get(x).calcularDmg(equipos.get(y).cantidadAtk.get(z)); // Comprueba la cantidad del
 																						// ataque y lo hace
@@ -250,7 +250,7 @@ public class Partida {
 		int y; // Recorre el array pElimin.
 		int pElimin;
 		// Guarda la posicion del equipo a eliminar desde el array equiposElimin.
-		ArrayList<Integer> equiposElimin = new ArrayList<Integer>(); // Guarda la posición de los equipos eliminados.
+		ArrayList<Integer> equiposElimin = new ArrayList<Integer>(); // Guarda la posiciï¿½n de los equipos eliminados.
 
 		for (x = equipos.size() - 1; x >= 0; x--) {
 
@@ -273,7 +273,7 @@ public class Partida {
 
 	public int cantMisilesError(int misilesEleccion, int x) {
 		if (misilesEleccion <= 0) {
-			System.out.println("¡No puedes atacar con 0 misiles o menos!");
+			System.out.println("ï¿½No puedes atacar con 0 misiles o menos!");
 		} else if (misilesEleccion > equipos.get(x).getMisilesRonda()) {
 			System.out.println("Misiles insuficientes.");
 		}
@@ -299,9 +299,9 @@ public class Partida {
 
 	public void mostrarGanador() {
 		parar(1000);
-		System.out.println("Sólo queda un equipo con vida...");
+		System.out.println("Sï¿½lo queda un equipo con vida...");
 		parar(1500);
-		System.out.println("¡El máximo campeón mundial súper guay de esta partida es... "
+		System.out.println("ï¿½El mï¿½ximo campeï¿½n mundial sï¿½per guay de esta partida es... "
 				+ equipos.get(0).getNombreEquipo() + "! Sois loh mehore.");
 		parar(2000);
 
@@ -314,7 +314,7 @@ public class Partida {
 	}
 
 	public void finalizarPartida() {
-		System.out.println("Partida terminada. Volviendo al menú principal...");
+		System.out.println("Partida terminada. Volviendo al menï¿½ principal...");
 		parar(2000);
 		equipos.clear();
 	}
@@ -329,7 +329,7 @@ public class Partida {
 				numero = teclado.nextInt();
 				esInt = true;
 			} else if (numero >= 1000000000) {
-				System.out.println("¡Ese numero es demasiado grande!");
+				System.out.println("ï¿½Ese numero es demasiado grande!");
 				numero = teclado.nextInt();
 			} else {
 				System.out.println("No puedes insertar letras.");
@@ -344,7 +344,7 @@ public class Partida {
 	public void reglasJuego() {
 		System.out.println("<-- REGLAS DEL JUEGO -->");
 
-		System.out.println("1 - Se necesita un minimo de 3 equipos para jugar y no hay límite máximo (1.000.000.000 equipos Por limitaciones del programa).");
+		System.out.println("1 - Se necesita un minimo de 3 equipos para jugar y no hay lï¿½mite mï¿½ximo (1.000.000.000 equipos Por limitaciones del programa).");
 		System.out.println("2 - Existen diferentes tipos de equipos. Cada tipo tiene sus propias estadisticas y estilo de juego.");
 		System.out.println("3 - Se puede atacar a diferentes equipos con diferentes ataques en la misma ronda.");
 		System.out.println("4 - Cuando las vidas de un equipo llegan a 0 este queda eliminado.");
@@ -352,31 +352,31 @@ public class Partida {
 		System.out.println("\nEjemplo defensa--> Si tenemos 50 misiles y usamos 40 para atacar\nsolo podremos usar 5 para defendernos (nos costarian 10 misiles).");
 		parar(2000);
 
-		System.out.println("\nIntroduce el numero 1 para volver al menú principal.");
+		System.out.println("\nIntroduce el numero 1 para volver al menï¿½ principal.");
 		opcionMenu = intScanner();
 
 		while (opcionMenu != 1) {
-			System.err.println("\nDebes introducir el numero 1 para volver al menú principal");
+			System.err.println("\nDebes introducir el numero 1 para volver al menï¿½ principal");
 			opcionMenu = intScanner();
 		}
 
 	}
 
 	public void infoJuego() {
-		System.out.println("\n<-- INFORMACIÓN -->\n");
+		System.out.println("\n<-- INFORMACIï¿½N -->\n");
 
 		System.out.println("Acerca de este programa:");
-		System.out.println("Coldwar es un simulador estratégico de ÉPICAS BATALLAS NAVALES donde deberás cambiar el rumbo de la batalla con tu propia audacia.\n¡Derrota a tus enemigos tomando decisiones arriesgadas y hazte con la victoria!");
+		System.out.println("Coldwar es un simulador estratï¿½gico de ï¿½PICAS BATALLAS NAVALES donde deberï¿½s cambiar el rumbo de la batalla con tu propia audacia.\nï¿½Derrota a tus enemigos tomando decisiones arriesgadas y hazte con la victoria!");
 		
-		System.out.println("\nVERSIÓN 2.0");
+		System.out.println("\nVERSIï¿½N 2.0");
 		System.out.println("\nAutores y contacto:\n   David Alba --> guepardar@gmail.com\n   Marc Valdivia --> marcvaldiviaprim99@gmail.com\n   Sergi Paz --> sergipaz17@gmail.com\n");
 		parar(2000);
 
-		System.out.println("\nIntroduce el numero 1 para volver al menú principal.");
+		System.out.println("\nIntroduce el numero 1 para volver al menï¿½ principal.");
 		opcionMenu = intScanner();
 
 		while (opcionMenu != 1) {
-			System.err.println("\nDebes introducir el numero 1 para volver al menú principal");
+			System.err.println("\nDebes introducir el numero 1 para volver al menï¿½ principal");
 			opcionMenu = intScanner();
 		}
 
@@ -385,14 +385,14 @@ public class Partida {
 	public void opcionesReproductor() {
 		System.out.println("<-- OPCIONES DEL REPRODUCTOR -->");
 
-		System.out.println("Desde aqui se podrá configurar el reproductor (Cuando haya uno).");
+		System.out.println("Desde aqui se podrï¿½ configurar el reproductor (Cuando haya uno).");
 		parar(2000);
 
-		System.out.println("\nIntroduce el numero 1 para volver al menú principal.");
+		System.out.println("\nIntroduce el numero 1 para volver al menï¿½ principal.");
 		opcionMenu = intScanner();
 
 		while (opcionMenu != 1) {
-			System.err.println("\nDebes introducir el numero 1 para volver al menú principal");
+			System.err.println("\nDebes introducir el numero 1 para volver al menï¿½ principal");
 			opcionMenu = intScanner();
 		}
 	}
