@@ -200,9 +200,8 @@ public class Planeta {
 			for (x = 0; x < equiposMuertos; x++) {
 				this.misilesBase = this.misilesBase + 20;
 				this.vidas = this.vidas + 40;
-				System.out.println("El nigromante recibe 20 misiles y se cura 40 de vida por cada equipo muerto.");
 			}
-			if (this.vidas > this.vidasBase) { // No permitimos que se cure más de sus vidas base.
+			if (this.vidas > this.vidasBase) { // No permitimos que se cure mï¿½s de sus vidas base.
 				this.vidas = this.vidasBase;
 			}
 		}

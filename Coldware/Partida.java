@@ -106,22 +106,29 @@ public class Partida {
 		int misilesEleccion;
 		int x = 0, y = 0, cont = equipos.size();
 		int opcion = 0;
+		int atkNecro = 0, hpNecro = 0;
 		int tipoObjetivo; // Variable que guarda el numero del tipo del objetivo
 
 		numRonda++;
 		System.out.println("\n\nRONDA " + numRonda);
+		for (x = 0; equipos.size() > x; x++) {	// Comprobamos si debemos activar la pasiva de los planetas nigromantes.
+			if (equipos.get(x).getTipoPlaneta() == 10) {
+				for (y = 0; y < equiposMuertos; y++) {
+					atkNecro = atkNecro + 20;
+					hpNecro = hpNecro + 40;
+				}
+				equipos.get(x).pasivaNigromante(equiposMuertos);
+				System.out.println("El equipo "+ equipos.get(x).getNombreMasTipo() +" recibe 20 misiles y se cura 40 de vida por cada equipo muerto.");
+				equipos.get(x).resetMisiles(10);
+				equiposMuertos = 0;
+			}
+		}
 		for (x = 0; equipos.size() > x; x++) {
 
 			equipos.get(x).resetMisiles(equipos.get(x).getTipoPlaneta());
 			equipos.get(x).setPosicionEquipo(x);
 			equipos.get(x).resetArrays();
 			equipos.get(x).resetDefensa();
-
-			if (equipos.get(x).getTipoPlaneta() == 10) {
-				equipos.get(x).pasivaNigromante(equiposMuertos); // ESTA PASIVA DEBERÍA ACTIVARSE AL INICIO DE LA RONDA, NO AL ENTRAR EN EL TURNO
-				equipos.get(x).resetMisiles(10);
-				equiposMuertos = 0;
-			}
 
 			if (equipos.get(x).isVivo() == true) {
 
@@ -208,7 +215,7 @@ public class Partida {
 
 	}
 
-	public void hacerAtaques(int x) { // CREAR VARIABLE ATAQUE TOTAL PARA LA CORRECTA APLICACI�N DE LA DEFENSA
+	public void hacerAtaques(int x) {
 
 		int y; // Equipo atacante
 		int z; // Posicion de los arrays
@@ -245,7 +252,7 @@ public class Partida {
 		parar(1500);
 	}
 
-	public void eliminarEquipos() { // EL ULTIMO EQUIPO SE ELIMINA Y EL PENULTIMO NO, AUNQUE ESTE MUERTO
+	public void eliminarEquipos() {
 		int x; // Recorre los equipos
 		int y; // Recorre el array pElimin.
 		int pElimin;
