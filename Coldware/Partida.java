@@ -118,7 +118,7 @@ public class Partida {
 					hpNecro = hpNecro + 40;
 				}
 				equipos.get(x).pasivaNigromante(equiposMuertos);
-				System.out.println("El equipo "+ equipos.get(x).getNombreMasTipo() +" recibe 20 misiles y se cura 40 de vida por cada equipo muerto.");
+				System.out.println("El equipo "+ equipos.get(x).getNombreMasTipo() +" recibe"+ atkNecro +" misiles y se cura "+ hpNecro +" de vida por cada equipo muerto.");
 				equipos.get(x).resetMisiles(10);
 				equiposMuertos = 0;
 			}
