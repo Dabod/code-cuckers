@@ -25,7 +25,7 @@ public class Partida {
 			System.out.println("Introduce el n�mero de equipos que van a jugar.");
 
 			cantidadEquipos = intScanner();
-			System.out.println(cantidadEquipos+" equipos seleccionados.");
+			System.out.println(cantidadEquipos + " equipos seleccionados.");
 			if (cantidadEquipos < 3) {
 
 				System.out.println("Se necesita un minimo de 3 equipos.");
@@ -50,7 +50,7 @@ public class Partida {
 
 			}
 
-			System.out.println("Selecciona el tipo de planeta para el Equipo " + (x + 1)+":");
+			System.out.println("Selecciona el tipo de planeta para el Equipo " + (x + 1) + ":");
 			parar(2000);
 			System.out.println("\n1) Planeta Normal:\n   200 de vida\n   50 misiles\n");
 			System.out.println(
@@ -111,16 +111,19 @@ public class Partida {
 
 		numRonda++;
 		System.out.println("\n\nRONDA " + numRonda);
-		for (x = 0; equipos.size() > x; x++) {	// Comprobamos si debemos activar la pasiva de los planetas nigromantes.
+		for (x = 0; equipos.size() > x; x++) { // Comprobamos si debemos activar la pasiva de los planetas nigromantes.
 			if (equipos.get(x).getTipoPlaneta() == 10) {
-				for (y = 0; y < equiposMuertos; y++) {
-					atkNecro = atkNecro + 20;
-					hpNecro = hpNecro + 40;
+				if (equiposMuertos > 0) {
+					for (y = 0; y < equiposMuertos; y++) {
+						atkNecro = atkNecro + 20;
+						hpNecro = hpNecro + 40;
+					}
+					equipos.get(x).pasivaNigromante(equiposMuertos);
+					System.out.println("El equipo " + equipos.get(x).getNombreMasTipo() + " recibe " + atkNecro
+							+ " misiles y se cura " + hpNecro + " de vida por cada equipo muerto.");
+					equipos.get(x).resetMisiles(10);
+					equiposMuertos = 0;
 				}
-				equipos.get(x).pasivaNigromante(equiposMuertos);
-				System.out.println("El equipo "+ equipos.get(x).getNombreMasTipo() +" recibe"+ atkNecro +" misiles y se cura "+ hpNecro +" de vida por cada equipo muerto.");
-				equipos.get(x).resetMisiles(10);
-				equiposMuertos = 0;
 			}
 		}
 		for (x = 0; equipos.size() > x; x++) {
@@ -157,7 +160,15 @@ public class Partida {
 					}
 
 					while (opcion > cont || opcion < 0) { // Error opcion no valida
-						System.out.println("�Opcion no v�lida! Selecciona una opci�n de la lista."); // UN EQUIPO PUEDE ATACARSE A SI MISMO SI ENTRA EN ESTE ERROR <-- SOLUCIONAR
+						System.out.println("�Opcion no v�lida! Selecciona una opci�n de la lista."); // UN EQUIPO
+																											// PUEDE
+																											// ATACARSE
+																											// A SI
+																											// MISMO SI
+																											// ENTRA EN
+																											// ESTE
+																											// ERROR <--
+																											// SOLUCIONAR
 						opcion = intScanner();
 					}
 
@@ -183,7 +194,9 @@ public class Partida {
 						} while (misilesEleccion <= 0 || misilesEleccion > equipos.get(x).getMisilesRonda());
 
 						equipos.get(x).usarMisiles(misilesEleccion);
-						misilesEleccion = pasivaOscuro(x, opcion, misilesEleccion); // FALTARIA MOSTRAR A LOS EQUIPOS OSCUROS CUANDO SE ACTIVA SU PASIVA (En la lista de objetivos)
+						misilesEleccion = pasivaOscuro(x, opcion, misilesEleccion); // FALTARIA MOSTRAR A LOS EQUIPOS
+																					// OSCUROS CUANDO SE ACTIVA SU
+																					// PASIVA (En la lista de objetivos)
 						equipos.get(x).ventajasColores(tipoObjetivo, misilesEleccion);
 						equipos.get(x).introducirAtaque(misilesEleccion);
 					}
@@ -197,7 +210,8 @@ public class Partida {
 
 		int x;
 
-		System.out.println("\n\n<-- RESULTADOS DE LA RONDA -->"); // FALTARIA MOSTRAR EL DAÑO TOTAL (REAL) QUE RECIBE CADA EQUIPO Y LA VIDA CON LA QUE SE QUEDA
+		System.out.println("\n\n<-- RESULTADOS DE LA RONDA -->"); // FALTARIA MOSTRAR EL DAÑO TOTAL (REAL) QUE RECIBE
+																	// CADA EQUIPO Y LA VIDA CON LA QUE SE QUEDA
 		parar(1000);
 		for (x = 0; x < equipos.size(); x++) {
 			System.out.println("  ------------------------  ");
@@ -232,7 +246,8 @@ public class Partida {
 							+ equipos.get(y).cantidadAtk.get(z) + " missiles");
 
 					if (equipos.get(x).getTipoPlaneta() == 6 && equipos.get(x).planetaEnano() == 1) {
-						System.out.println(equipos.get(x).getNombreEquipo()+" es jodido matrix (�Esquiva el ataque!)\n");
+						System.out.println(
+								equipos.get(x).getNombreEquipo() + " es jodido matrix (�Esquiva el ataque!)\n");
 					} else {
 						equipos.get(x).calcularDmg(equipos.get(y).cantidadAtk.get(z)); // Comprueba la cantidad del
 																						// ataque y lo hace
@@ -351,12 +366,15 @@ public class Partida {
 	public void reglasJuego() {
 		System.out.println("<-- REGLAS DEL JUEGO -->");
 
-		System.out.println("1 - Se necesita un minimo de 3 equipos para jugar y no hay l�mite m�ximo (1.000.000.000 equipos Por limitaciones del programa).");
-		System.out.println("2 - Existen diferentes tipos de equipos. Cada tipo tiene sus propias estadisticas y estilo de juego.");
+		System.out.println(
+				"1 - Se necesita un minimo de 3 equipos para jugar y no hay l�mite m�ximo (1.000.000.000 equipos Por limitaciones del programa).");
+		System.out.println(
+				"2 - Existen diferentes tipos de equipos. Cada tipo tiene sus propias estadisticas y estilo de juego.");
 		System.out.println("3 - Se puede atacar a diferentes equipos con diferentes ataques en la misma ronda.");
 		System.out.println("4 - Cuando las vidas de un equipo llegan a 0 este queda eliminado.");
 		System.out.println("5 - Los misiles de defensa cuestan el doble.");
-		System.out.println("\nEjemplo defensa--> Si tenemos 50 misiles y usamos 40 para atacar\nsolo podremos usar 5 para defendernos (nos costarian 10 misiles).");
+		System.out.println(
+				"\nEjemplo defensa--> Si tenemos 50 misiles y usamos 40 para atacar\nsolo podremos usar 5 para defendernos (nos costarian 10 misiles).");
 		parar(2000);
 
 		System.out.println("\nIntroduce el numero 1 para volver al men� principal.");
@@ -373,10 +391,12 @@ public class Partida {
 		System.out.println("\n<-- INFORMACI�N -->\n");
 
 		System.out.println("Acerca de este programa:");
-		System.out.println("Coldwar es un simulador estrat�gico de �PICAS BATALLAS NAVALES donde deber�s cambiar el rumbo de la batalla con tu propia audacia.\n�Derrota a tus enemigos tomando decisiones arriesgadas y hazte con la victoria!");
-		
+		System.out.println(
+				"Coldwar es un simulador estrat�gico de �PICAS BATALLAS NAVALES donde deber�s cambiar el rumbo de la batalla con tu propia audacia.\n�Derrota a tus enemigos tomando decisiones arriesgadas y hazte con la victoria!");
+
 		System.out.println("\nVERSI�N 2.0");
-		System.out.println("\nAutores y contacto:\n   David Alba --> guepardar@gmail.com\n   Marc Valdivia --> marcvaldiviaprim99@gmail.com\n   Sergi Paz --> sergipaz17@gmail.com\n");
+		System.out.println(
+				"\nAutores y contacto:\n   David Alba --> guepardar@gmail.com\n   Marc Valdivia --> marcvaldiviaprim99@gmail.com\n   Sergi Paz --> sergipaz17@gmail.com\n");
 		parar(2000);
 
 		System.out.println("\nIntroduce el numero 1 para volver al men� principal.");
@@ -412,5 +432,5 @@ public class Partida {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

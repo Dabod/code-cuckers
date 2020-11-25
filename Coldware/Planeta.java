@@ -196,22 +196,20 @@ public class Planeta {
 	public void pasivaNigromante(int equiposMuertos) { // Activa la pasiva de los planetas tipo Nigromante.
 		int x;
 
-		if (equiposMuertos > 0) {
-			for (x = 0; x < equiposMuertos; x++) {
-				this.misilesBase = this.misilesBase + 20;
-				this.vidas = this.vidas + 40;
-			}
-			if (this.vidas > this.vidasBase) { // No permitimos que se cure m�s de sus vidas base.
-				this.vidas = this.vidasBase;
-			}
+		for (x = 0; x < equiposMuertos; x++) {
+			this.misilesBase = this.misilesBase + 20;
+			this.vidas = this.vidas + 40;
+		}
+		if (this.vidas > this.vidasBase) { // No permitimos que se cure m�s de sus vidas base.
+			this.vidas = this.vidasBase;
 		}
 	}
 
 	public void pasivaVegeta(int cantidadEquipos, int tipoEquipo) { // Activa la pasiva del Planeta Vegeta
 		int x;
-		
-		if(tipoEquipo == 9) {
-			for(x = 0; x < (cantidadEquipos - 1); x++) {
+
+		if (tipoEquipo == 9) {
+			for (x = 0; x < (cantidadEquipos - 1); x++) {
 				this.vidas = this.vidas + 100;
 				this.misilesBase = this.misilesBase + 20;
 			}
@@ -345,5 +343,4 @@ public class Planeta {
 		this.cantidadAtk = cantidadAtk;
 	}
 
-	
 }
